@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{039FB33D-CA7F-44D0-BEB4-E8528A2D9585}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="app\components\bower_components\font-roboto\roboto.html" />
+    <Content Include="app\components\bower_components\iron-a11y-announcer\.gitignore" />
+    <Content Include="app\components\bower_components\iron-a11y-announcer\demo\index.html" />
+    <Content Include="app\components\bower_components\iron-a11y-announcer\demo\x-announces.html" />
+    <Content Include="app\components\bower_components\iron-a11y-announcer\index.html" />
+    <Content Include="app\components\bower_components\iron-a11y-announcer\iron-a11y-announcer.html" />
+    <Content Include="app\components\bower_components\iron-a11y-announcer\test\index.html" />
+    <Content Include="app\components\bower_components\iron-a11y-announcer\test\iron-a11y-announcer.html" />
+    <Content Include="app\components\bower_components\iron-a11y-keys-behavior\.gitignore" />
+    <Content Include="app\components\bower_components\iron-a11y-keys-behavior\demo\index.html" />
+    <Content Include="app\components\bower_components\iron-a11y-keys-behavior\demo\x-key-aware.html" />
+    <Content Include="app\components\bower_components\iron-a11y-keys-behavior\index.html" />
+    <Content Include="app\components\bower_components\iron-a11y-keys-behavior\iron-a11y-keys-behavior.html" />
+    <Content Include="app\components\bower_components\iron-a11y-keys-behavior\test\basic-test.html" />
+    <Content Include="app\components\bower_components\iron-a11y-keys-behavior\test\index.html" />
+    <Content Include="app\components\bower_components\iron-autogrow-textarea\.gitignore" />
+    <Content Include="app\components\bower_components\iron-autogrow-textarea\demo\index.html" />
+    <Content Include="app\components\bower_components\iron-autogrow-textarea\hero.svg" />
+    <Content Include="app\components\bower_components\iron-autogrow-textarea\index.html" />
+    <Content Include="app\components\bower_components\iron-autogrow-textarea\iron-autogrow-textarea.html" />
+    <Content Include="app\components\bower_components\iron-autogrow-textarea\test\basic.html" />
+    <Content Include="app\components\bower_components\iron-autogrow-textarea\test\index.html" />
+    <Content Include="app\components\bower_components\iron-behaviors\.gitignore" />
+    <Content Include="app\components\bower_components\iron-behaviors\demo\index.html" />
+    <Content Include="app\components\bower_components\iron-behaviors\demo\simple-button.html" />
+    <Content Include="app\components\bower_components\iron-behaviors\index.html" />
+    <Content Include="app\components\bower_components\iron-behaviors\iron-button-state.html" />
+    <Content Include="app\components\bower_components\iron-behaviors\iron-control-state.html" />
+    <Content Include="app\components\bower_components\iron-behaviors\test\active-state.html" />
+    <Content Include="app\components\bower_components\iron-behaviors\test\disabled-state.html" />
+    <Content Include="app\components\bower_components\iron-behaviors\test\focused-state.html" />
+    <Content Include="app\components\bower_components\iron-behaviors\test\index.html" />
+    <Content Include="app\components\bower_components\iron-behaviors\test\test-elements.html" />
+    <Content Include="app\components\bower_components\iron-flex-layout\.gitignore" />
+    <Content Include="app\components\bower_components\iron-flex-layout\classes\iron-flex-layout.html" />
+    <Content Include="app\components\bower_components\iron-flex-layout\classes\iron-shadow-flex-layout.html" />
+    <Content Include="app\components\bower_components\iron-flex-layout\demo\index.html" />
+    <Content Include="app\components\bower_components\iron-flex-layout\index.html" />
+    <Content Include="app\components\bower_components\iron-flex-layout\iron-flex-layout-classes.html" />
+    <Content Include="app\components\bower_components\iron-flex-layout\iron-flex-layout.html" />
+    <Content Include="app\components\bower_components\iron-flex-layout\test\index.html" />
+    <Content Include="app\components\bower_components\iron-flex-layout\test\iron-flex-layout-classes.html" />
+    <Content Include="app\components\bower_components\iron-flex-layout\test\iron-flex-layout.html" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\.gitignore" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\demo\index.html" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\demo\simple-element.html" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\demo\simple-form.html" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\index.html" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\iron-form-element-behavior.html" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\test\basic.html" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\test\index.html" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\test\simple-element.html" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\test\simple-form.html" />
+    <Content Include="app\components\bower_components\iron-input\.gitignore" />
+    <Content Include="app\components\bower_components\iron-input\demo\index.html" />
+    <Content Include="app\components\bower_components\iron-input\hero.svg" />
+    <Content Include="app\components\bower_components\iron-input\index.html" />
+    <Content Include="app\components\bower_components\iron-input\iron-input.html" />
+    <Content Include="app\components\bower_components\iron-input\test\disabled-input.html" />
+    <Content Include="app\components\bower_components\iron-input\test\index.html" />
+    <Content Include="app\components\bower_components\iron-input\test\iron-input.html" />
+    <Content Include="app\components\bower_components\iron-input\test\letters-only.html" />
+    <Content Include="app\components\bower_components\iron-meta\.gitignore" />
+    <Content Include="app\components\bower_components\iron-meta\demo\index.html" />
+    <Content Include="app\components\bower_components\iron-meta\hero.svg" />
+    <Content Include="app\components\bower_components\iron-meta\index.html" />
+    <Content Include="app\components\bower_components\iron-meta\iron-meta.html" />
+    <Content Include="app\components\bower_components\iron-meta\test\basic.html" />
+    <Content Include="app\components\bower_components\iron-meta\test\index.html" />
+    <Content Include="app\components\bower_components\iron-meta\test\iron-meta.html" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\.gitignore" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\demo\cats-only.html" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\demo\index.html" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\demo\validatable-input.html" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\index.html" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\iron-validatable-behavior.html" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\test\cats-only.html" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\test\dogs-only.html" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\test\index.html" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\test\iron-validatable-behavior.html" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\test\test-validatable.html" />
+    <Content Include="app\components\bower_components\paper-input\.gitignore" />
+    <Content Include="app\components\bower_components\paper-input\all-imports.html" />
+    <Content Include="app\components\bower_components\paper-input\demo\index.html" />
+    <Content Include="app\components\bower_components\paper-input\demo\ssn-input.html" />
+    <Content Include="app\components\bower_components\paper-input\demo\ssn-validator.html" />
+    <Content Include="app\components\bower_components\paper-input\hero.svg" />
+    <Content Include="app\components\bower_components\paper-input\index.html" />
+    <Content Include="app\components\bower_components\paper-input\paper-input-addon-behavior.html" />
+    <Content Include="app\components\bower_components\paper-input\paper-input-behavior.html" />
+    <Content Include="app\components\bower_components\paper-input\paper-input-char-counter.html" />
+    <Content Include="app\components\bower_components\paper-input\paper-input-container.html" />
+    <Content Include="app\components\bower_components\paper-input\paper-input-error.html" />
+    <Content Include="app\components\bower_components\paper-input\paper-input.html" />
+    <Content Include="app\components\bower_components\paper-input\paper-textarea.html" />
+    <Content Include="app\components\bower_components\paper-input\test\index.html" />
+    <Content Include="app\components\bower_components\paper-input\test\letters-only.html" />
+    <Content Include="app\components\bower_components\paper-input\test\paper-input-char-counter.html" />
+    <Content Include="app\components\bower_components\paper-input\test\paper-input-container.html" />
+    <Content Include="app\components\bower_components\paper-input\test\paper-input-error.html" />
+    <Content Include="app\components\bower_components\paper-input\test\paper-input.html" />
+    <Content Include="app\components\bower_components\paper-input\test\paper-textarea.html" />
+    <Content Include="app\components\bower_components\paper-styles\classes\global.html" />
+    <Content Include="app\components\bower_components\paper-styles\classes\shadow-layout.html" />
+    <Content Include="app\components\bower_components\paper-styles\classes\shadow.html" />
+    <Content Include="app\components\bower_components\paper-styles\classes\typography.html" />
+    <Content Include="app\components\bower_components\paper-styles\color.html" />
+    <Content Include="app\components\bower_components\paper-styles\default-theme.html" />
+    <Content Include="app\components\bower_components\paper-styles\demo-pages.html" />
+    <Content Include="app\components\bower_components\paper-styles\demo.css" />
+    <Content Include="app\components\bower_components\paper-styles\demo\index.html" />
+    <Content Include="app\components\bower_components\paper-styles\index.html" />
+    <Content Include="app\components\bower_components\paper-styles\paper-styles-classes.html" />
+    <Content Include="app\components\bower_components\paper-styles\paper-styles.html" />
+    <Content Include="app\components\bower_components\paper-styles\shadow.html" />
+    <Content Include="app\components\bower_components\paper-styles\typography.html" />
+    <Content Include="app\components\bower_components\polymer\LICENSE.txt" />
+    <Content Include="app\components\bower_components\polymer\polymer-micro.html" />
+    <Content Include="app\components\bower_components\polymer\polymer-mini.html" />
+    <Content Include="app\components\bower_components\polymer\polymer.html" />
+    <Content Include="app\components\bower_components\webcomponentsjs\CustomElements.js" />
+    <Content Include="app\components\bower_components\webcomponentsjs\CustomElements.min.js" />
+    <Content Include="app\components\bower_components\webcomponentsjs\HTMLImports.js" />
+    <Content Include="app\components\bower_components\webcomponentsjs\HTMLImports.min.js" />
+    <Content Include="app\components\bower_components\webcomponentsjs\MutationObserver.js" />
+    <Content Include="app\components\bower_components\webcomponentsjs\MutationObserver.min.js" />
+    <Content Include="app\components\bower_components\webcomponentsjs\ShadowDOM.js" />
+    <Content Include="app\components\bower_components\webcomponentsjs\ShadowDOM.min.js" />
+    <Content Include="app\components\bower_components\webcomponentsjs\webcomponents-lite.js" />
+    <Content Include="app\components\bower_components\webcomponentsjs\webcomponents-lite.min.js" />
+    <Content Include="app\components\bower_components\webcomponentsjs\webcomponents.js" />
+    <Content Include="app\components\bower_components\webcomponentsjs\webcomponents.min.js" />
+    <Content Include="app\components\login-component\images\logo.png" />
+    <Content Include="app\components\login-component\login-component.html" />
+    <Content Include="app\components\login-component\login-component.js" />
+    <Content Include="app\components\menu-component\menu-component.html" />
+    <Content Include="app\components\menu-component\menu-component.js" />
+    <Content Include="index.html" />
+    <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\components\bower_components\font-roboto\.bower.json" />
+    <Content Include="app\components\bower_components\font-roboto\bower.json" />
+    <Content Include="app\components\bower_components\font-roboto\README.md" />
+    <Content Include="app\components\bower_components\iron-a11y-announcer\.bower.json" />
+    <Content Include="app\components\bower_components\iron-a11y-announcer\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="app\components\bower_components\iron-a11y-announcer\.travis.yml" />
+    <Content Include="app\components\bower_components\iron-a11y-announcer\bower.json" />
+    <Content Include="app\components\bower_components\iron-a11y-announcer\CONTRIBUTING.md" />
+    <Content Include="app\components\bower_components\iron-a11y-announcer\README.md" />
+    <Content Include="app\components\bower_components\iron-a11y-keys-behavior\.bower.json" />
+    <Content Include="app\components\bower_components\iron-a11y-keys-behavior\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="app\components\bower_components\iron-a11y-keys-behavior\.travis.yml" />
+    <Content Include="app\components\bower_components\iron-a11y-keys-behavior\bower.json" />
+    <Content Include="app\components\bower_components\iron-a11y-keys-behavior\CONTRIBUTING.md" />
+    <Content Include="app\components\bower_components\iron-a11y-keys-behavior\README.md" />
+    <Content Include="app\components\bower_components\iron-autogrow-textarea\.bower.json" />
+    <Content Include="app\components\bower_components\iron-autogrow-textarea\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="app\components\bower_components\iron-autogrow-textarea\.travis.yml" />
+    <Content Include="app\components\bower_components\iron-autogrow-textarea\bower.json" />
+    <Content Include="app\components\bower_components\iron-autogrow-textarea\CONTRIBUTING.md" />
+    <Content Include="app\components\bower_components\iron-autogrow-textarea\README.md" />
+    <Content Include="app\components\bower_components\iron-behaviors\.bower.json" />
+    <Content Include="app\components\bower_components\iron-behaviors\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="app\components\bower_components\iron-behaviors\.travis.yml" />
+    <Content Include="app\components\bower_components\iron-behaviors\bower.json" />
+    <Content Include="app\components\bower_components\iron-behaviors\CONTRIBUTING.md" />
+    <Content Include="app\components\bower_components\iron-behaviors\README.md" />
+    <Content Include="app\components\bower_components\iron-flex-layout\.bower.json" />
+    <Content Include="app\components\bower_components\iron-flex-layout\.travis.yml" />
+    <Content Include="app\components\bower_components\iron-flex-layout\bower.json" />
+    <Content Include="app\components\bower_components\iron-flex-layout\CONTRIBUTING.md" />
+    <Content Include="app\components\bower_components\iron-flex-layout\README.md" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\.bower.json" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\.travis.yml" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\bower.json" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\CONTRIBUTING.md" />
+    <Content Include="app\components\bower_components\iron-form-element-behavior\README.md" />
+    <Content Include="app\components\bower_components\iron-input\.bower.json" />
+    <Content Include="app\components\bower_components\iron-input\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="app\components\bower_components\iron-input\.travis.yml" />
+    <Content Include="app\components\bower_components\iron-input\bower.json" />
+    <Content Include="app\components\bower_components\iron-input\CONTRIBUTING.md" />
+    <Content Include="app\components\bower_components\iron-input\README.md" />
+    <Content Include="app\components\bower_components\iron-meta\.bower.json" />
+    <Content Include="app\components\bower_components\iron-meta\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="app\components\bower_components\iron-meta\.travis.yml" />
+    <Content Include="app\components\bower_components\iron-meta\bower.json" />
+    <Content Include="app\components\bower_components\iron-meta\CONTRIBUTING.md" />
+    <Content Include="app\components\bower_components\iron-meta\README.md" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\.bower.json" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\.travis.yml" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\bower.json" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\CONTRIBUTING.md" />
+    <Content Include="app\components\bower_components\iron-validatable-behavior\README.md" />
+    <Content Include="app\components\bower_components\paper-input\.bower.json" />
+    <Content Include="app\components\bower_components\paper-input\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="app\components\bower_components\paper-input\.travis.yml" />
+    <Content Include="app\components\bower_components\paper-input\bower.json" />
+    <Content Include="app\components\bower_components\paper-input\CONTRIBUTING.md" />
+    <Content Include="app\components\bower_components\paper-input\README.md" />
+    <Content Include="app\components\bower_components\paper-styles\.bower.json" />
+    <Content Include="app\components\bower_components\paper-styles\bower.json" />
+    <Content Include="app\components\bower_components\paper-styles\CONTRIBUTING.md" />
+    <Content Include="app\components\bower_components\paper-styles\README.md" />
+    <Content Include="app\components\bower_components\polymer\.bower.json" />
+    <Content Include="app\components\bower_components\polymer\bower.json" />
+    <Content Include="app\components\bower_components\polymer\build.log" />
+    <Content Include="app\components\bower_components\webcomponentsjs\.bower.json" />
+    <Content Include="app\components\bower_components\webcomponentsjs\bower.json" />
+    <Content Include="app\components\bower_components\webcomponentsjs\build.log" />
+    <Content Include="app\components\bower_components\webcomponentsjs\package.json" />
+    <Content Include="app\components\bower_components\webcomponentsjs\README.md" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>plataformaWeb</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53531</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:53531/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+</Project>

@@ -1,0 +1,147 @@
+﻿<link rel="import" href="..\bower_components\vaadin-grid\vaadin-grid.html">
+<link rel="import" href="..\bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="..\bower_components\paper-toolbar\paper-toolbar.html">
+<link rel="import" href="..\bower_components\paper-icon-button\paper-icon-button.html">
+<link rel="import" href="..\bower_components\paper-dialog\paper-dialog.html">
+<link rel="import" href="..\bower_components\paper-input\paper-input.html">
+<link rel="import" href="..\bower_components\paper-button\paper-button.html">
+<link rel="import" href="..\bower_components\paper-fab\paper-fab.html">
+<link rel="import" href="..\bower_components\paper-drawer-panel\paper-drawer-panel.html">
+<link rel="import" href="..\bower_components\iron-icon\iron-icon.html">
+
+<dom-module id="menu-component">
+    <template>
+        <style>
+            :host {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            vaadin-grid{
+            z-index: 0!important;
+        }
+
+        paper-toolbar {
+            background: #33383a!important;
+        }
+
+        paper-fab {
+            background-color: #ff3a39!important;
+            position: absolute!important;
+            bottom: 30px;
+            right: 30px;
+            z-index: 2!important;
+        }
+
+        paper-toolbar paper-button {
+            color: #00b4f0!important;
+        }
+
+        paper-drawer-panel {
+
+        }
+
+        #simple {
+            height: 300px;
+        }
+
+        #searchInput {
+            width: 200px;
+        }
+        </style>
+
+        <paper-drawer-panel id="paperDrawerPanel" force-narrow>
+            <div drawer>
+                <button tabindex="0" paper-drawer-toggle>Close drawer</button>
+            </div>
+            <div main>
+                <paper-toolbar>
+                    <paper-icon-button icon="icons:menu" paper-drawer-toggle></paper-icon-button>
+                    <span class="title">Title</span>
+                    <paper-button onclick="toggleModal('modal1')">Info</paper-button>
+                    <paper-button onclick="toggleModal('modal2')">Logout</paper-button>
+                </paper-toolbar>
+
+                <paper-fab id="paper-fab" icon="add" title="add" onclick=""></paper-fab>
+
+                <vaadin-grid id="gridUser" visible-rows="10" selection-mode="Multi">
+                    <table>
+                        <colgroup>
+                            <col name="#" width="80" />
+                            <col name="firstName" />
+                            <col name="lastName" />
+                            <col name="email" />
+                        </colgroup>
+                    </table>
+                </vaadin-grid>
+            </div>
+        </paper-drawer-panel>
+
+        <!-- Ventanas modales -->
+        <paper-dialog id="modal1" modal>
+            <p>Modal1</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec odio enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur hendrerit quis magna ac commodo. Quisque non felis suscipit sem vehicula eleifend. In dictum lobortis lorem, non malesuada velit laoreet non. Duis vitae congue est. Nullam lectus risus, finibus fringilla tempor a, dignissim id urna. Sed vestibulum felis vitae iaculis tristique. Nulla a venenatis arcu. Maecenas ornare nunc nec feugiat laoreet. Donec eu accumsan neque. Integer a sem ultrices, consectetur nulla non, mollis erat.</p>
+            <div class="buttons">
+                <paper-button id="buttonCancelRegister" onclick="toggleModal('modal1')">Cancelar</paper-button>
+                <paper-button id="buttonCreateRegister" onclick="toggleModal('modal1')">Aceptar</paper-button>
+            </div>
+        </paper-dialog>
+
+
+        <paper-dialog id="modal2" modal>
+            <p>Modal2</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec odio enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur hendrerit quis magna ac commodo. Quisque non felis suscipit sem vehicula eleifend. In dictum lobortis lorem, non malesuada velit laoreet non. Duis vitae congue est. Nullam lectus risus, finibus fringilla tempor a, dignissim id urna. Sed vestibulum felis vitae iaculis tristique. Nulla a venenatis arcu. Maecenas ornare nunc nec feugiat laoreet. Donec eu accumsan neque. Integer a sem ultrices, consectetur nulla non, mollis erat.</p>
+            <div class="buttons">
+                <paper-button id="buttonCancelRegister" onclick="toggleModal('modal2')">Cancelar</paper-button>
+                <paper-button id="buttonCreateRegister" onclick="toggleModal('modal2')">Aceptar</paper-button>
+            </div>
+        </paper-dialog>
+
+        <!-- Aux. components -->
+        <toast-component></toast-component>
+
+    </template>
+    <script>
+
+    Polymer({
+
+        is: 'menu-component',
+
+        properties: {
+
+        },
+
+        attached: function () {
+            (function () {
+                HTMLImports.whenReady(function () {
+                    var grid = document.querySelector('#gridUser');
+
+                    grid.columns[0].renderer = function (cell) {
+                        cell.element.textContent = cell.row.index;
+                    };
+
+                    getJSON('https://demo.vaadin.com/demo-data/1.0/people', function (json) {
+                        console.log(json.result)
+                        grid.items = json.result;
+                    });
+                });
+
+                function getJSON(url, callback) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                            callback(JSON.parse(xhr.responseText));
+                        }
+                    };
+                    xhr.open('GET', url, true);
+                    xhr.send();
+                }
+            })();
+        }
+    });
+
+    </script>
+</dom-module>

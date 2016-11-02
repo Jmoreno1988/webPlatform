@@ -1,0 +1,150 @@
+﻿<link rel="import" href="../bower_components\paper-input\paper-input.html">
+<link rel="import" href="../bower_components\paper-button\paper-button.html">
+<link rel="import" href="../bower_components\paper-toast\paper-toast.html">
+
+<dom-module id="login-component">
+    <template>
+        <style>
+            :host {
+                color: white;
+                --paper-input-container-color: white;
+                --paper-input-container-focus-color: #00b4f0;
+                --paper-input-container-input-color: white;
+            }
+
+            paper-button {
+                background-color: #00b4f0 !important;
+            }
+
+            .center {
+                width: 300px;
+                margin: 0 auto;
+            }
+            
+            #header {
+                position:relative;
+                background-color: #33383a;
+                width: 100%;
+                height: 35%;
+                border-bottom: 1px solid #ff3a39;
+                transition: all 1s;
+            }
+
+                #header h1 {
+                    color: #FFFFFF;
+                    font-size: 24px;
+                    font-weight: 300;
+                    width: 300px;
+                }
+
+            #panelLogin {
+                background-color: #33383a;
+                margin: 0 auto 16px;
+                width: 300px;
+            }
+
+            #body {
+                background-color: #33383a;
+                width: 100%;
+                height: 65%;
+                border-top: 1px solid #ff3a39;
+                transition: all 1s;
+            }
+
+            #buttonEnter {
+                margin: 20px 0 0 -0px;
+            }
+
+            #title{
+                position: absolute;
+                bottom: 0;
+            }
+
+            
+
+            #msgError1 {
+                --paper-toast-background-color: red;
+                --paper-toast-color: white;
+            }
+
+            /** Animations **/
+            .moveUp {
+                -ms-transform: translate(0, -100%); /* IE 9 */
+                -webkit-transform: translate(0, -100%); /* Safari */
+                transform: translate(0, -100%);
+            }
+
+            .moveDown {
+                -ms-transform: translate(0, 100%); /* IE 9 */
+                -webkit-transform: translate(0, 100%); /* Safari */
+                transform: translate(0, 100%);
+            }
+            /** End Animations **/
+        </style>
+
+        <div id="header">
+            <div class="center">
+                <h1 id="title">Title WebApp</h1>
+            </div>
+        </div>
+
+        <div id="body">
+            <div id="panelLogin">
+                <paper-input id="userName" class="paperCustom" label="User name"></paper-input>
+                <paper-input id="password" label="Password"></paper-input>
+                <paper-button id="buttonEnter" class="custom" on-click="_validate">Enter</paper-button>
+            </div>
+        </div>
+        <div id="footer">
+            
+        </div>
+        <paper-toast id="msgError1" text="Usuario o contraseña incorrectos"></paper-toast>
+    </template>
+    <script>
+
+    Polymer({
+
+        is: 'login-component',
+
+        properties: {
+
+        },
+
+        ready: function () {
+        },
+
+        _enter: function () {
+            var nHeader = document.querySelector('#header');
+            var nBody = document.querySelector('#body');
+
+            nHeader.classList.toggle('moveUp');
+            nBody.classList.toggle('moveDown');
+        },
+
+        _validate: function () {
+            var socket = io.connect('http://localhost:3000', { 'forceNew': true });
+
+            socket.on('respondValidate', function (msg) {
+                switch(msg.type) {
+                    case 200:
+                        this._enter();
+                        break;
+                    case 410:
+                        this._showToast();
+                        break;
+                }
+            }.bind(this))
+
+            socket.emit('validateUser', {
+                userName: this.$.userName.value,
+                password: this.$.password.value
+            })
+        },
+
+        _showToast: function () {
+            this.$.msgError1.open();
+        }
+    });
+
+    </script>
+</dom-module>
