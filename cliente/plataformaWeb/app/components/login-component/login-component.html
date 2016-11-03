@@ -12,12 +12,13 @@
                 --paper-input-container-input-color: white;
             }
 
-            paper-button {
-            }
-
             .center {
                 width: 300px;
                 margin: 0 auto;
+            }
+
+            .lightBlue {
+                background-color: #00b4f0!important;
             }
 
             .hidden {
@@ -76,11 +77,6 @@
             }
 
 
-
-            .lightBlue {
-                background-color: #00b4f0!important;
-            }
-
             /** Animations **/
             .moveUp {
                 -ms-transform: translate(0, -100%); /* IE 9 */
@@ -131,14 +127,25 @@
         },
 
         ready: function () {
+            document.addEventListener('closeSession', function () { this._close() }.bind(this));
         },
 
         _enter: function () {
             var nHeader = document.querySelector('#header');
             var nBody = document.querySelector('#body');
 
-            nHeader.classList.toggle('moveUp');
-            nBody.classList.toggle('moveDown');
+            nHeader.classList.add('moveUp');
+            nBody.classList.add('moveDown');
+
+            this.fire('initSession');
+        },
+
+        _close: function() {
+            var nHeader = document.querySelector('#header');
+            var nBody = document.querySelector('#body');
+
+            nHeader.classList.remove('moveUp');
+            nBody.classList.remove('moveDown');
         },
 
         _validate: function () {
@@ -209,11 +216,11 @@
 
         _isLoginValidate: function () {
             var isValid = false;
-            var userName = this.polymerObj.$.userNewUser;
-            var userNewPassword = this.polymerObj.$.userNewPassword;
-            var userNewRePassword = this.polymerObj.$.userNewRePassword;
-            var email = this.polymerObj.$.userNewEmail;
-
+            var userName = this.$.userName;
+            var userNewPassword = this.$.password;
+            var userNewRePassword = this.$.rePassword;
+            var email = this.$.email;
+            /*
             if (this.validateInputsNewUSer(userName.value)) {
                 userName.invalid = false;
                 if (this.validatePasswords(userNewPassword.value, userNewRePassword.value)) {
@@ -235,7 +242,7 @@
                 userName.invalid = true;
                 this.polymerObj.fire('showToastMsg', { typeMsg: "error", time: 6000, msg: "El nombre de usuario debe estar comprendido entre 5 y 12 caracteres y estar compuesto solo por caracteres alfanuméricos." });
             }
-
+            */
             return isValid;
         },
     });
