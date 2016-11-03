@@ -7,12 +7,14 @@ var io = require('socket.io')(http);
 var path = require('path');
 var Sequelize = require('sequelize');
 var port = 3000;
+vm.runInThisContext(fs.readFileSync(__dirname + '/cfg.js'));
 
 
 function main() {
-    vm.runInThisContext(fs.readFileSync(__dirname + "/cfg.js"));
-    vm.runInThisContext(fs.readFileSync(__dirname + "/models/ModelUsers.js"));
-    vm.runInThisContext(fs.readFileSync(__dirname + "/class/HandlerLogin.js"));
+    
+    for(var i = 0; i < cfg.localDependencies.length; i++)
+        vm.runInThisContext(fs.readFileSync(__dirname + cfg.localDependencies[i]));
+
     var sq = new Sequelize(cfg.chainConnection.development);
 
     var modelUsers = new ModelUsers('Users', sq, Sequelize);

@@ -16,3 +16,9 @@ D:\laboratorio\common\common\plataformaWeb\cliente\plataformaWeb\bin\plataformaW
 D:\laboratorio\common\common\plataformaWeb\cliente\plataformaWeb\obj\Debug\plataformaWeb.csprojResolveAssemblyReference.cache
 D:\laboratorio\common\common\plataformaWeb\cliente\plataformaWeb\obj\Debug\plataformaWeb.dll
 D:\laboratorio\common\common\plataformaWeb\cliente\plataformaWeb\obj\Debug\plataformaWeb.pdb
+D:\laboratorio\webPlatform\cliente\plataformaWeb\bin\plataformaWeb.dll.config
+D:\laboratorio\webPlatform\cliente\plataformaWeb\bin\plataformaWeb.dll
+D:\laboratorio\webPlatform\cliente\plataformaWeb\bin\plataformaWeb.pdb
+D:\laboratorio\webPlatform\cliente\plataformaWeb\obj\Debug\plataformaWeb.csprojResolveAssemblyReference.cache
+D:\laboratorio\webPlatform\cliente\plataformaWeb\obj\Debug\plataformaWeb.dll
+D:\laboratorio\webPlatform\cliente\plataformaWeb\obj\Debug\plataformaWeb.pdb

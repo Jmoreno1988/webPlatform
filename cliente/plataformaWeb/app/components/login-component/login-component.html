@@ -7,18 +7,21 @@
         <style>
             :host {
                 color: white;
-                --paper-input-container-color: white;
+                --paper-input-container-color: #9E9E9E;
                 --paper-input-container-focus-color: #00b4f0;
                 --paper-input-container-input-color: white;
             }
 
             paper-button {
-                background-color: #00b4f0 !important;
             }
 
             .center {
                 width: 300px;
                 margin: 0 auto;
+            }
+
+            .hidden {
+                display: none;
             }
             
             #header {
@@ -27,7 +30,7 @@
                 width: 100%;
                 height: 35%;
                 border-bottom: 1px solid #ff3a39;
-                transition: all 1s;
+                transition: all 1s; 
             }
 
                 #header h1 {
@@ -62,9 +65,20 @@
 
             
 
-            #msgError1 {
-                --paper-toast-background-color: red;
+            #msgError {
+                --paper-toast-background-color: #D32F2F;
                 --paper-toast-color: white;
+            }
+
+            #msgSuccess {
+                --paper-toast-background-color: #4CAF50;
+                --paper-toast-color: white;
+            }
+
+
+
+            .lightBlue {
+                background-color: #00b4f0!important;
             }
 
             /** Animations **/
@@ -90,15 +104,21 @@
 
         <div id="body">
             <div id="panelLogin">
-                <paper-input id="userName" class="paperCustom" label="User name"></paper-input>
-                <paper-input id="password" label="Password"></paper-input>
-                <paper-button id="buttonEnter" class="custom" on-click="_validate">Enter</paper-button>
+                <paper-input id="userName" class="paperCustom" label="User name" maxlength="20"></paper-input>
+                <paper-input id="password" label="Password" type="password" maxlength="20"></paper-input>
+                <paper-input id="rePassword" label="RePassword" type="password" class="hidden" maxlength="20"></paper-input>
+                <paper-input id="email" label="Email" class="hidden" maxlength="100"></paper-input>
+                <paper-button id="buttonCancel" class="hidden" on-click="_toggleFormNewUser"> Cancel </paper-button>
+                <paper-button id="buttonRegister" class="hidden lightBlue" on-click="_createUser"> Create an account </paper-button>
+                <paper-button id="msgFormRegister" on-click="_toggleFormNewUser"> Sign up </paper-button>
+                <paper-button id="buttonEnter" class="lightBlue" on-click="_validate"> Login </paper-button>
             </div>
         </div>
+
         <div id="footer">
-            
         </div>
-        <paper-toast id="msgError1" text="Usuario o contraseña incorrectos"></paper-toast>
+        <paper-toast id="msgError" text=""></paper-toast>
+        <paper-toast id="msgSuccess" text=""></paper-toast>
     </template>
     <script>
 
@@ -130,7 +150,7 @@
                         this._enter();
                         break;
                     case 410:
-                        this._showToast();
+                        this._showToast("error", "Usuario o contraseña incorrectos");
                         break;
                 }
             }.bind(this))
@@ -141,9 +161,83 @@
             })
         },
 
-        _showToast: function () {
-            this.$.msgError1.open();
-        }
+        _createUser: function () {
+            var socket = io.connect('http://localhost:3000', { 'forceNew': true });
+
+            socket.on('respondCreateUser', function (msg) {
+                switch (msg.type) {
+                    case 200:
+                        this._toggleFormNewUser();
+                        this._showToast("success", "Usuario registrado correctamente");
+                        break;
+                    case 410:
+                        this._showToast("error", "El nombre de usuario ya existe");
+                        break;
+                }
+            }.bind(this))
+
+            socket.emit('createUser', {
+                userName: this.$.userName.value,
+                password: this.$.password.value,
+                email: this.$.email.value
+            })
+        },
+
+        _showToast: function (type, msg) {
+            switch (type) {
+                case "error":
+                    this.$.msgError.text = msg;
+                    this.$.msgError.open();
+                    break;
+
+                case "success":
+                    this.$.msgSuccess.text = msg;
+                    this.$.msgSuccess.open();
+                    break;
+            }
+            
+        },
+
+        _toggleFormNewUser: function() {
+            this.$.rePassword.classList.toggle('hidden');
+            this.$.email.classList.toggle('hidden');
+            this.$.buttonCancel.classList.toggle('hidden');
+            this.$.buttonRegister.classList.toggle('hidden');
+            this.$.buttonEnter.classList.toggle('hidden');
+            this.$.msgFormRegister.classList.toggle('hidden');
+        },
+
+        _isLoginValidate: function () {
+            var isValid = false;
+            var userName = this.polymerObj.$.userNewUser;
+            var userNewPassword = this.polymerObj.$.userNewPassword;
+            var userNewRePassword = this.polymerObj.$.userNewRePassword;
+            var email = this.polymerObj.$.userNewEmail;
+
+            if (this.validateInputsNewUSer(userName.value)) {
+                userName.invalid = false;
+                if (this.validatePasswords(userNewPassword.value, userNewRePassword.value)) {
+                    userNewPassword.invalid = false;
+                    userNewRePassword.invalid = false;
+                    if (this.validateEmail(email.value)) {
+                        email.invalid = false;
+                        isValid = true;
+                    } else {
+                        email.invalid = true;
+                        this.polymerObj.fire('showToastMsg', { typeMsg: "error", time: 6000, msg: "Formato del email invalido." });
+                    }
+                } else {
+                    userNewPassword.invalid = true;
+                    userNewRePassword.invalid = true;
+                    this.polymerObj.fire('showToastMsg', { typeMsg: "error", time: 6000, msg: "La contraseña debe ser igual en los dos campos, estar compuesta solo por caracteres alfanuméricos y comprendida entre 5 y 12 caracteres." });
+                }
+            } else {
+                userName.invalid = true;
+                this.polymerObj.fire('showToastMsg', { typeMsg: "error", time: 6000, msg: "El nombre de usuario debe estar comprendido entre 5 y 12 caracteres y estar compuesto solo por caracteres alfanuméricos." });
+            }
+
+            return isValid;
+        },
     });
 
     </script>
