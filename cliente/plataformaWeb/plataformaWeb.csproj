@@ -16,8 +16,10 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="app\cfg.js" />
     <Content Include="app\components\bower_components\font-roboto\roboto.html" />
     <Content Include="app\components\bower_components\iron-a11y-announcer\.gitignore" />
     <Content Include="app\components\bower_components\iron-a11y-announcer\demo\index.html" />

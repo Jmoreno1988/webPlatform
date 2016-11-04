@@ -6,9 +6,16 @@
 <link rel="import" href="..\bower_components\paper-input\paper-input.html">
 <link rel="import" href="..\bower_components\paper-button\paper-button.html">
 <link rel="import" href="..\bower_components\paper-fab\paper-fab.html">
+<link rel="import" href="..\bower_components\paper-listbox\paper-listbox.html">
 <link rel="import" href="..\bower_components\paper-item\paper-item.html">
+<link rel="import" href="..\bower_components\paper-item\paper-icon-item.html">
+<link rel="import" href="..\bower_components\paper-material\paper-material.html">
 <link rel="import" href="..\bower_components\paper-drawer-panel\paper-drawer-panel.html">
 <link rel="import" href="..\bower_components\iron-icon\iron-icon.html">
+<link rel="import" href="..\bower_components\iron-icons\social-icons.html">
+<link rel="import" href="..\bower_components\iron-icons\communication-icons.html">
+<link rel="import" href="..\bower_components\paper-dropdown-menu\paper-dropdown-menu.html">
+<link rel="import" href="..\bower_components\vaadin-combo-box\vaadin-combo-box.html">
 
 <dom-module id="menu-component">
     <template>
@@ -21,55 +28,143 @@
                 height: 100%;
             }
 
-            vaadin-grid{
-            z-index: 0!important;
-        }
+            vaadin-grid {
+                z-index: 0 !important;
+            }
 
-        paper-toolbar {
-            background: #33383a!important;
-        }
+            paper-item {
+                border-bottom: 1px solid rgba(158, 158, 158, .5);
+            }
 
-        paper-fab {
-            background-color: #ff3a39!important;
-            position: absolute!important;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1!important;
-        }
+            paper-toolbar {
+                background: #33383a !important;
+            }
 
-        paper-toolbar paper-button {
-            color: #00b4f0!important;
-        }
+            paper-fab {
+                background-color: #ff3a39 !important;
+                position: absolute !important;
+                bottom: 30px;
+                right: 30px;
+                z-index: 1 !important;
+            }
 
-        paper-drawer-panel {
+            paper-toolbar paper-button {
+                color: #00b4f0 !important;
+            }
 
-        }
+            paper-dropdown-menu {
+                width: 100px;
+            }
 
-        .avatarRed {
-            width: 35px;
-            height: 35px;
-            background-color: #F44336;
-            border-radius: 50%;
-            margin: 0 10px 0 0;
-        }
+            .avatarRed {
+                width: 35px;
+                height: 35px;
+                background-color: #F44336;
+                border-radius: 50%;
+                margin: 0 10px 0 0;
+                float: left;
+            }
 
-        .avatarGreen {
-            width: 35px;
-            height: 35px;
-            background-color: #8BC34A;
-            border-radius: 50%;
-            margin: 0 10px 0 0;
-        }
+            .avatarGreen {
+                width: 35px;
+                height: 35px;
+                background-color: #8BC34A;
+                border-radius: 50%;
+                margin: 0 10px 0 0;
+            }
 
-        #simple {
-            height: 300px;
-        }
+            .fontGreen {
+                color: #8BC34A;
+            }
 
-        #searchInput {
-            width: 200px;
-        }
+            .fontRed {
+                color: #F44336;
+            }
+
+            .yellow {
+                color: #FFEB3B;
+            }
+
+            .red {
+                color: #F44336;
+            }
+
+            .green {
+                color: #8BC34A;
+            }
+
+            .blue {
+                color: #2196F3;
+            }
+
+            .campHeadList {
+                text-align: center;
+            }
+
+            .colRival {
+                text-align: center;
+                width: 30%;
+            }
+
+            .colState {
+                text-align: center;
+                width: 15%;
+            }
+
+            .colInitGame {
+                text-align: center;
+                width: 15%;
+            }
+
+            .colLastMove {
+                text-align: center;
+                width: 15%;
+            }
+
+            .colOptions {
+                text-align: center;
+                width: 25%;
+            }
+
+            .campRival {
+                text-align: center;
+                width: 30%;
+            }
+
+            #simple {
+                height: 300px;
+            }
+
+            #searchInput {
+                width: 200px;
+            }
+
+            #createGameModal {
+                border-top: 10px solid #F44336;
+            }
+
+            #buttonRandomOpponent {
+                cursor: pointer;
+            }
+
+            #inputSearchUser {
+                margin-top: -10px;
+            }
+
+            #buttonRandomOpponent{
+                margin-top: -5px;
+                float: right;
+            }
+
+            #comboTime {
+                width: 115px;
+            }
+
+            #comboColors {
+                margin: -43px 0 0 150px;
+                width: 115px;
+            }
         </style>
-
         <paper-drawer-panel id="paperDrawerPanel" force-narrow>
             <div drawer>
                 <button tabindex="0" paper-drawer-toggle>Close drawer</button>
@@ -82,43 +177,145 @@
                     <paper-button on-click="_finish">Logout</paper-button>
                 </paper-toolbar>
 
-                <paper-fab id="paper-fab" icon="add" title="add" onclick=""></paper-fab>
-                <paper-item>Status Name Options</paper-item>
-                <paper-item><div class="avatarRed"></div>  Jeremy B. <paper-icon-button icon="icons:star-border"></paper-icon-button><paper-icon-button icon="social:share"></paper-icon-button><paper-icon-button icon="icons:delete"></paper-icon-button></paper-item>
-                <paper-item><div class="avatarGreen"></div> Sandra Cordoba </paper-item>
-                <!--
-                    
-                <vaadin-grid id="gridUser" visible-rows="10">
-                    <table>
-                        <colgroup>
-                            <col name="#"  />
-                            <col name="state" />
-                            <col name="info" />
-                            <col name="options" />
-                        </colgroup>
-                    </table>
-                </vaadin-grid>
-                -->
+                <paper-fab id="paper-fab" icon="add" title="add"></paper-fab>
+
+                <paper-material elevation="1">
+                    <paper-item>
+                        <div class="colRival"> Rival </div>
+                        <div class="colState"> State game </div>
+                        <div class="colInitGame"> Init game </div>
+                        <div class="colLastMove"> Last Mov. </div>
+                        <div class="colOptions"> Options </div>
+                    </paper-item>
+                </paper-material>
+
+                <div id="contentGames">
+                    <paper-item>
+                        <div class="colRival">
+                            <paper-icon-item>
+                                <div class="avatarGreen" item-icon></div>
+                                Alphonso Engel (14-7)
+                            </paper-icon-item>
+                        </div>
+                        <div class="colState"> their move </div>
+                        <div class="colInitGame"> 04/11/2016 </div>
+                        <div class="colLastMove"> 29 min </div>
+                        <div class="colOptions">
+                            <paper-icon-button class="yellow" icon="icons:star"></paper-icon-button>
+                            <paper-icon-button class="green" icon="communication:chat"></paper-icon-button>
+                            <paper-icon-button class="blue" icon="social:share"></paper-icon-button>
+                            <paper-icon-button class="red" icon="icons:delete"></paper-icon-button>
+                        </div>
+                    </paper-item>
+
+
+                    <paper-item>
+                        <div class="colRival">
+                            <paper-icon-item>
+                                <div class="avatarGreen" item-icon></div>
+                                Alphonso Engel (14-7)
+                            </paper-icon-item>
+                        </div>
+                        <div class="colState"> their move </div>
+                        <div class="colInitGame"> 04/11/2016 </div>
+                        <div class="colLastMove"> 29 min </div>
+                        <div class="colOptions">
+                            <paper-icon-button class="yellow" icon="icons:star"></paper-icon-button>
+                            <paper-icon-button class="green" icon="communication:chat"></paper-icon-button>
+                            <paper-icon-button class="blue" icon="social:share"></paper-icon-button>
+                            <paper-icon-button class="red" icon="icons:delete"></paper-icon-button>
+                        </div>
+                    </paper-item>
+
+                    <paper-item>
+                        <div class="colRival">
+                            <paper-icon-item>
+                                <div class="avatarGreen" item-icon></div>
+                                Alphonso Engel (14-7)
+                            </paper-icon-item>
+                        </div>
+                        <div class="colState"> their move </div>
+                        <div class="colInitGame"> 04/11/2016 </div>
+                        <div class="colLastMove"> 29 min </div>
+                        <div class="colOptions">
+                            <paper-icon-button class="yellow" icon="icons:star"></paper-icon-button>
+                            <paper-icon-button class="green" icon="communication:chat"></paper-icon-button>
+                            <paper-icon-button class="blue" icon="social:share"></paper-icon-button>
+                            <paper-icon-button class="red" icon="icons:delete"></paper-icon-button>
+                        </div>
+                    </paper-item>
+
+                    <paper-item>
+                        <div class="colRival">
+                            <paper-icon-item>
+                                <div class="avatarGreen" item-icon></div>
+                                Alphonso Engel (14-7)
+                            </paper-icon-item>
+                        </div>
+                        <div class="colState"> their move </div>
+                        <div class="colInitGame"> 04/11/2016 </div>
+                        <div class="colLastMove"> 29 min </div>
+                        <div class="colOptions">
+                            <paper-icon-button class="yellow" icon="icons:star"></paper-icon-button>
+                            <paper-icon-button class="green" icon="communication:chat"></paper-icon-button>
+                            <paper-icon-button class="blue" icon="social:share"></paper-icon-button>
+                            <paper-icon-button class="red" icon="icons:delete"></paper-icon-button>
+                        </div>
+                    </paper-item>
+                </div>
             </div>
         </paper-drawer-panel>
 
+
         <!-- Ventanas modales -->
-        <paper-dialog id="modal1" modal>
-            <p>Modal1</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec odio enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur hendrerit quis magna ac commodo. Quisque non felis suscipit sem vehicula eleifend. In dictum lobortis lorem, non malesuada velit laoreet non. Duis vitae congue est. Nullam lectus risus, finibus fringilla tempor a, dignissim id urna. Sed vestibulum felis vitae iaculis tristique. Nulla a venenatis arcu. Maecenas ornare nunc nec feugiat laoreet. Donec eu accumsan neque. Integer a sem ultrices, consectetur nulla non, mollis erat.</p>
-            <div class="buttons">
-                <paper-button id="buttonCancelRegister" onclick="toggleModal('modal1')">Cancelar</paper-button>
-                <paper-button id="buttonCreateRegister" onclick="toggleModal('modal1')">Aceptar</paper-button>
-            </div>
-        </paper-dialog>
+        <!-- Crear partida -->
+        <paper-dialog id="createGameModal" modal>
+            <h2>New Game</h2>
 
+            <paper-button id="buttonRandomOpponent" class="blue">Random opponent</paper-button>
 
-        <paper-dialog id="modal2" modal>
-            <p>Modal2</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec odio enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur hendrerit quis magna ac commodo. Quisque non felis suscipit sem vehicula eleifend. In dictum lobortis lorem, non malesuada velit laoreet non. Duis vitae congue est. Nullam lectus risus, finibus fringilla tempor a, dignissim id urna. Sed vestibulum felis vitae iaculis tristique. Nulla a venenatis arcu. Maecenas ornare nunc nec feugiat laoreet. Donec eu accumsan neque. Integer a sem ultrices, consectetur nulla non, mollis erat.</p>
+            <paper-input label="Search users" id="inputSearchUser">
+                <paper-icon-button suffix  icon="search" alt="search" title="search"></paper-icon-button>
+                <paper-icon-button suffix  icon="clear" alt="clear" title="clear"></paper-icon-button>
+            </paper-input>
+            <!--
+                
+            <template is="dom-bind" id="createGameOptions">
+                <vaadin-combo-box id="comboTime" label="Time" class="time" items="[[timeControl]]"></vaadin-combo-box>
+                <vaadin-combo-box id="comboColors" label="Color" class="colors" items="[[colors]]"></vaadin-combo-box>
+                <vaadin-combo-box label="Type" class="type" items="[[variants]]"></vaadin-combo-box>
+            </template>
+            -->
+
+            <paper-dropdown-menu id="" label="Color">
+                <paper-listbox selected="0" class="dropdown-content">
+                    <paper-item> White </paper-item>
+                    <paper-item> Black </paper-item>
+                    <paper-item> Random </paper-item>
+                </paper-listbox>
+            </paper-dropdown-menu>
+
+            <paper-dropdown-menu id="" label="Time">
+                <paper-listbox selected="0" class="dropdown-content">
+                    <paper-item> 5 min </paper-item>
+                    <paper-item> 1 hour </paper-item>
+                    <paper-item> 1 day </paper-item>
+                    <paper-item> Unlimited </paper-item>
+                </paper-listbox>
+            </paper-dropdown-menu>
+
+            <paper-dropdown-menu id="" label="Type Game">
+                <paper-listbox selected="0" class="dropdown-content">
+                    <paper-item> Standard </paper-item>
+                    <paper-item> CrazyHouse </paper-item>
+                    <paper-item> Chess960 </paper-item>
+                    <paper-item> Atomic </paper-item>
+                </paper-listbox>
+            </paper-dropdown-menu>
+
             <div class="buttons">
-                <paper-button id="buttonCancelRegister" onclick="toggleModal('modal2')">Cancelar</paper-button>
-                <paper-button id="buttonCreateRegister" onclick="toggleModal('modal2')">Aceptar</paper-button>
+                <paper-button id="buttonCancelRegister">Cancel</paper-button>
+                <paper-button id="buttonCreateRegister" onclick="">Create</paper-button>
             </div>
         </paper-dialog>
 
@@ -128,54 +325,39 @@
     </template>
     <script>
 
-    Polymer({
+        Polymer({
 
-        is: 'menu-component',
+            is: 'menu-component',
 
-        properties: {
+            properties: {
 
-        },
+            },
 
-        attached: function () {
-            document.addEventListener('initSession', function () { this._init() }.bind(this));
-        },
+            attached: function () {
+                document.addEventListener('initSession', function () { this._init() }.bind(this));
+                this.$$("#paper-fab").addEventListener('click', function () { this._toggleModal('createGameModal') }.bind(this));
+                this.$$("#buttonCancelRegister").addEventListener('click', function () { this._toggleModal('createGameModal') }.bind(this));
+                /*
+                this.$$("#createGameOptions").variants = cfg.variants;
+                this.$$("#createGameOptions").timeControl = cfg.timeControl;
+                this.$$("#createGameOptions").colors = cfg.colors;
+                this.$$("#createGameOptions").value = 'White';
+                */
+            },
 
-        _init: function () {
-        /*
-            (function () {
-                HTMLImports.whenReady(function () {
-                    var grid = document.querySelector('#gridUser');
+            _init: function () {
 
-                    grid.columns[0].renderer = function (cell) {
-                        cell.element.textContent = cell.row.index;
-                    };
+            },
 
-                    getJSON('https://demo.vaadin.com/demo-data/1.0/people', function (json) {
-                        var obj = [{ state: 'okok', info: 'ok', options: 'ok' }]
-                        console.log(json.result)
-                        grid.items = obj;
-                    });
-                });
+            _finish: function () {
+                // Activar login
+                this.fire('closeSession');
+            },
 
-                function getJSON(url, callback) {
-                    var xhr = new XMLHttpRequest();
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                            callback(JSON.parse(xhr.responseText));
-                        }
-                    };
-                    xhr.open('GET', url, true);
-                    xhr.send();
-                }
-            })();
-            */
-        },
-
-        _finish: function () {
-            // Activar login
-            this.fire('closeSession');
-        }
-    });
+            _toggleModal: function (id) {
+                document.querySelector("#" + id).toggle();
+            }
+        });
 
     </script>
 </dom-module>
