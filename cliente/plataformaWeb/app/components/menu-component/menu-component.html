@@ -278,14 +278,6 @@
                 <paper-icon-button suffix  icon="search" alt="search" title="search"></paper-icon-button>
                 <paper-icon-button suffix  icon="clear" alt="clear" title="clear"></paper-icon-button>
             </paper-input>
-            <!--
-                
-            <template is="dom-bind" id="createGameOptions">
-                <vaadin-combo-box id="comboTime" label="Time" class="time" items="[[timeControl]]"></vaadin-combo-box>
-                <vaadin-combo-box id="comboColors" label="Color" class="colors" items="[[colors]]"></vaadin-combo-box>
-                <vaadin-combo-box label="Type" class="type" items="[[variants]]"></vaadin-combo-box>
-            </template>
-            -->
 
             <paper-dropdown-menu id="" label="Color">
                 <paper-listbox selected="0" class="dropdown-content">
@@ -337,12 +329,7 @@
                 document.addEventListener('initSession', function () { this._init() }.bind(this));
                 this.$$("#paper-fab").addEventListener('click', function () { this._toggleModal('createGameModal') }.bind(this));
                 this.$$("#buttonCancelRegister").addEventListener('click', function () { this._toggleModal('createGameModal') }.bind(this));
-                /*
-                this.$$("#createGameOptions").variants = cfg.variants;
-                this.$$("#createGameOptions").timeControl = cfg.timeControl;
-                this.$$("#createGameOptions").colors = cfg.colors;
-                this.$$("#createGameOptions").value = 'White';
-                */
+                this.$$("#buttonRandomOpponent").addEventListener('click', function () { this._getRandomUser() }.bind(this));
             },
 
             _init: function () {
@@ -356,6 +343,23 @@
 
             _toggleModal: function (id) {
                 document.querySelector("#" + id).toggle();
+            },
+
+            _getRandomUser: function () {
+                var socket = io.connect('http://localhost:3000', { 'forceNew': true });
+
+                socket.on('respondGetRandomUser', function (msg) {
+                    switch (msg.type) {
+                        case 200:
+                            this._enter();
+                            break;
+                        case 400:
+                            this._showToast("error", "Error con la conexión al servidor");
+                            break;
+                    }
+                }.bind(this))
+
+                socket.emit('getRandomUser', {});
             }
         });
 

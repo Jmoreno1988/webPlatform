@@ -1,11 +1,13 @@
 HandlerLogin.prototype.constructor = HandlerLogin;
 
-function HandlerLogin(socket, modelUser) {
+function HandlerLogin(socket, modelUser, sq) {
 	this.socket = socket;
 	this.modelUser = modelUser;
+	this.sq = sq;
     
     socket.on('validateUser', function(data) { this.validateUser(data.userName, data.password) }.bind(this));
     socket.on('createUser', function(data) { this.createUser(data.userName, data.password, data.email) }.bind(this));
+    socket.on('getRandomUser', function(data) { this.getRandomUser() }.bind(this));
 }
 
 HandlerLogin.prototype.validateUser = function(userName, password) {
@@ -28,4 +30,15 @@ HandlerLogin.prototype.createUser = function(userName, password, email) {
       	this.socket.emit('respondCreateUser', {type: 410, data: {}});	
   	}.bind(this))
 
+}
+
+HandlerLogin.prototype.getRandomUser = function() {
+	this.sq.query("SELECT COUNT(*) as totalUsers FROM `users`", { type: this.sq.QueryTypes.SELECT})
+		.then(function(result) {
+			var rand = Math.floor(Math.random() * result[0].totalUsers);
+			this.sq.query("SELECT * FROM `users` where id=" + rand, { type: this.sq.QueryTypes.SELECT}).
+			then(function(result){
+				//this.socket.emit('respondGetRandomUser', {id: 200, data: {id: result.id, }});	ME quedo aqui, tengp que repasaar la bbdd
+			}.bind(this))
+  	}.bind(this))
 }

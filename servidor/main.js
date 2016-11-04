@@ -21,7 +21,7 @@ function main() {
 
     // Por cada nueva conexión
     io.on('connection', function(socket) {  
-        var handlerLogin = new HandlerLogin(socket, modelUsers.getModel());
+        var handlerLogin = new HandlerLogin(socket, modelUsers.getModel(), sq);
     
     });
 }
