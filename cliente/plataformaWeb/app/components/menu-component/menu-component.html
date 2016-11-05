@@ -15,7 +15,7 @@
 <link rel="import" href="..\bower_components\iron-icons\social-icons.html">
 <link rel="import" href="..\bower_components\iron-icons\communication-icons.html">
 <link rel="import" href="..\bower_components\paper-dropdown-menu\paper-dropdown-menu.html">
-<link rel="import" href="..\bower_components\vaadin-combo-box\vaadin-combo-box.html">
+<link rel="import" href="..\card-game\card-game.html">
 
 <dom-module id="menu-component">
     <template>
@@ -30,10 +30,6 @@
 
             vaadin-grid {
                 z-index: 0 !important;
-            }
-
-            paper-item {
-                border-bottom: 1px solid rgba(158, 158, 158, .5);
             }
 
             paper-toolbar {
@@ -190,78 +186,8 @@
                 </paper-material>
 
                 <div id="contentGames">
-                    <paper-item>
-                        <div class="colRival">
-                            <paper-icon-item>
-                                <div class="avatarGreen" item-icon></div>
-                                Alphonso Engel (14-7)
-                            </paper-icon-item>
-                        </div>
-                        <div class="colState"> their move </div>
-                        <div class="colInitGame"> 04/11/2016 </div>
-                        <div class="colLastMove"> 29 min </div>
-                        <div class="colOptions">
-                            <paper-icon-button class="yellow" icon="icons:star"></paper-icon-button>
-                            <paper-icon-button class="green" icon="communication:chat"></paper-icon-button>
-                            <paper-icon-button class="blue" icon="social:share"></paper-icon-button>
-                            <paper-icon-button class="red" icon="icons:delete"></paper-icon-button>
-                        </div>
-                    </paper-item>
-
-
-                    <paper-item>
-                        <div class="colRival">
-                            <paper-icon-item>
-                                <div class="avatarGreen" item-icon></div>
-                                Alphonso Engel (14-7)
-                            </paper-icon-item>
-                        </div>
-                        <div class="colState"> their move </div>
-                        <div class="colInitGame"> 04/11/2016 </div>
-                        <div class="colLastMove"> 29 min </div>
-                        <div class="colOptions">
-                            <paper-icon-button class="yellow" icon="icons:star"></paper-icon-button>
-                            <paper-icon-button class="green" icon="communication:chat"></paper-icon-button>
-                            <paper-icon-button class="blue" icon="social:share"></paper-icon-button>
-                            <paper-icon-button class="red" icon="icons:delete"></paper-icon-button>
-                        </div>
-                    </paper-item>
-
-                    <paper-item>
-                        <div class="colRival">
-                            <paper-icon-item>
-                                <div class="avatarGreen" item-icon></div>
-                                Alphonso Engel (14-7)
-                            </paper-icon-item>
-                        </div>
-                        <div class="colState"> their move </div>
-                        <div class="colInitGame"> 04/11/2016 </div>
-                        <div class="colLastMove"> 29 min </div>
-                        <div class="colOptions">
-                            <paper-icon-button class="yellow" icon="icons:star"></paper-icon-button>
-                            <paper-icon-button class="green" icon="communication:chat"></paper-icon-button>
-                            <paper-icon-button class="blue" icon="social:share"></paper-icon-button>
-                            <paper-icon-button class="red" icon="icons:delete"></paper-icon-button>
-                        </div>
-                    </paper-item>
-
-                    <paper-item>
-                        <div class="colRival">
-                            <paper-icon-item>
-                                <div class="avatarGreen" item-icon></div>
-                                Alphonso Engel (14-7)
-                            </paper-icon-item>
-                        </div>
-                        <div class="colState"> their move </div>
-                        <div class="colInitGame"> 04/11/2016 </div>
-                        <div class="colLastMove"> 29 min </div>
-                        <div class="colOptions">
-                            <paper-icon-button class="yellow" icon="icons:star"></paper-icon-button>
-                            <paper-icon-button class="green" icon="communication:chat"></paper-icon-button>
-                            <paper-icon-button class="blue" icon="social:share"></paper-icon-button>
-                            <paper-icon-button class="red" icon="icons:delete"></paper-icon-button>
-                        </div>
-                    </paper-item>
+                    <card-game username = "Pedro Sanchez" state="your move"></card-game>
+                    <card-game></card-game>
                 </div>
             </div>
         </paper-drawer-panel>
@@ -310,7 +236,7 @@
                 <paper-button id="buttonCreateRegister" onclick="">Create</paper-button>
             </div>
         </paper-dialog>
-
+        
         <!-- Aux. components -->
         <toast-component></toast-component>
 
@@ -329,7 +255,8 @@
                 document.addEventListener('initSession', function () { this._init() }.bind(this));
                 this.$$("#paper-fab").addEventListener('click', function () { this._toggleModal('createGameModal') }.bind(this));
                 this.$$("#buttonCancelRegister").addEventListener('click', function () { this._toggleModal('createGameModal') }.bind(this));
-                this.$$("#buttonRandomOpponent").addEventListener('click', function () { this._getRandomUser() }.bind(this));
+                //this.$$("#buttonRandomOpponent").addEventListener('click', function () { this._getRandomUser() }.bind(this));
+                //this.$$(".buttonRemoveGame").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
             },
 
             _init: function () {
@@ -360,6 +287,11 @@
                 }.bind(this))
 
                 socket.emit('getRandomUser', {});
+            },
+
+            _remove: function () {
+                var parent = Polymer.dom(this).parentNode;
+                Polymer.dom(parent).removeChild(this);
             }
         });
 

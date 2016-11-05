@@ -1,0 +1,33 @@
+﻿<script src="..\bower_components\jquery\dist\jquery.min.js"></script>
+<script src="..\bower_components/chessboard-js\js\chessboard.js" ></script>
+<link rel=StyleSheet href="..\bower_components/chessboard-js\css/chessboard.css" type="text/css">
+<dom-module id="board-chess">
+    <style>
+        #board {
+            max-width: 500px;
+            width: 100%;
+            min-width: 300px;
+        }
+    </style>
+
+    <template>
+        <div id="board"></div>
+
+    </template>
+    <script>
+
+        Polymer({
+
+            is: 'board-chess',
+
+            properties: {
+            },
+
+            attached: function () {
+                var ruyLopez = 'r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R';
+                var board = new Chessboard('board');
+                this.$.board.addEventListener('click', function () { console.log(board.getPosition(ChessUtils.FEN.id))});
+            }
+        })
+    </script>
+</dom-module>

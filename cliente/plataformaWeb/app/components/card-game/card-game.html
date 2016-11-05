@@ -1,0 +1,185 @@
+﻿<link rel="import" href="..\bower_components\vaadin-grid\vaadin-grid.html">
+<link rel="import" href="..\bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="..\bower_components\paper-toolbar\paper-toolbar.html">
+<link rel="import" href="..\bower_components\paper-icon-button\paper-icon-button.html">
+<link rel="import" href="..\bower_components\paper-dialog\paper-dialog.html">
+<link rel="import" href="..\bower_components\paper-input\paper-input.html">
+<link rel="import" href="..\bower_components\paper-button\paper-button.html">
+<link rel="import" href="..\bower_components\paper-fab\paper-fab.html">
+<link rel="import" href="..\bower_components\paper-listbox\paper-listbox.html">
+<link rel="import" href="..\bower_components\paper-item\paper-item.html">
+<link rel="import" href="..\bower_components\paper-item\paper-icon-item.html">
+<link rel="import" href="..\bower_components\paper-material\paper-material.html">
+<link rel="import" href="..\bower_components\paper-drawer-panel\paper-drawer-panel.html">
+<link rel="import" href="..\bower_components\iron-icon\iron-icon.html">
+<link rel="import" href="..\bower_components\iron-icons\social-icons.html">
+<link rel="import" href="..\bower_components\iron-icons\communication-icons.html">
+<link rel="import" href="..\bower_components\paper-dropdown-menu\paper-dropdown-menu.html">
+<link rel="import" href="..\bower_components\vaadin-combo-box\vaadin-combo-box.html">
+<link rel="import" href="..\board-chess/board-chess.html">
+
+<dom-module id="card-game">
+    <template>
+        <style>
+            :host {
+            }
+
+            paper-item {
+                border-bottom: 1px solid rgba(158, 158, 158, .5);
+            }
+
+            .avatarRed {
+                width: 35px;
+                height: 35px;
+                background-color: #F44336;
+                border-radius: 50%;
+                margin: 0 10px 0 0;
+                float: left;
+            }
+
+            .avatarGreen {
+                width: 35px;
+                height: 35px;
+                background-color: #8BC34A;
+                border-radius: 50%;
+                margin: 0 10px 0 0;
+            }
+
+            .fontGreen {
+                color: #8BC34A;
+            }
+
+            .fontRed {
+                color: #F44336;
+            }
+
+            .yellow {
+                color: #FFEB3B;
+            }
+
+            .red {
+                color: #F44336;
+            }
+
+            .green {
+                color: #8BC34A;
+            }
+
+            .blue {
+                color: #2196F3;
+            }
+
+            .colRival {
+                text-align: center;
+                width: 30%;
+            }
+
+            .colState {
+                text-align: center;
+                width: 15%;
+            }
+
+            .colInitGame {
+                text-align: center;
+                width: 15%;
+            }
+
+            .colLastMove {
+                text-align: center;
+                width: 15%;
+            }
+
+            .colOptions {
+                text-align: center;
+                width: 25%;
+            }
+
+            .campRival {
+                text-align: center;
+                width: 30%;
+            }
+
+            #modalRemoveGame {
+                border-top: 10px solid #F44336;
+            }
+        </style>
+
+        <paper-item>
+            <div class="colRival">
+                <paper-icon-item>
+                    <div class="avatarGreen" item-icon></div>
+                    [[username]]
+                </paper-icon-item>
+            </div>
+            <div class="colState"> [[state]] </div>
+            <div class="colInitGame"> [[initgame]] </div>
+            <div class="colLastMove"> [[lastmove]] </div>
+            <div class="colOptions">
+                <paper-icon-button id="buttonStart" class="yellow" icon="icons:star"></paper-icon-button>
+                <paper-icon-button class="green" icon="communication:chat"></paper-icon-button>
+                <paper-icon-button class="blue" icon="social:share"></paper-icon-button>
+                <paper-icon-button id="buttonRemoveGame" class="red" icon="icons:delete"></paper-icon-button>
+            </div>
+        </paper-item>
+
+
+
+        <!-- Ventanas modales -->
+        <!--  Borrar partida  -->
+        <paper-dialog id="modalRemoveGame" modal>
+            <h2>Remove game</h2>
+
+            <div> Are you sure? </div>
+
+            <div class="buttons">
+                <paper-button id="buttonCancelRegister">Cancel</paper-button>
+                <paper-button id="buttonAcceptRemoveGame">Accept</paper-button>
+            </div>
+        </paper-dialog>
+
+    </template>
+    <script>
+
+        Polymer({
+
+            is: 'card-game',
+
+            properties: {
+                username: String,
+                state: String,
+                initgame: String,
+                lastmov: String
+            },
+
+            attached: function () {
+                this.$$("#buttonAcceptRemoveGame").addEventListener('click', function () { this._remove() }.bind(this));
+                this.$$("#buttonRemoveGame").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
+                this.$$("#buttonCancelRegister").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
+                this.$$("#buttonStart").addEventListener('click', function () { this._goToBoard() }.bind(this))
+            },
+
+            _init: function () {
+
+            },
+
+            _finish: function () {
+            },
+
+            _toggleModal: function (id) {
+                document.querySelector("#" + id).toggle();
+            },
+
+            _remove: function () {
+                //socket.emit('getRandomUser', {});
+                var parent = Polymer.dom(this).parentNode;
+                Polymer.dom(parent).removeChild(this);
+            },
+
+            _goToBoard: function () {
+                var node = document.createElement("board-chess");
+                document.body.appendChild(node);
+            }
+        });
+
+    </script>
+</dom-module>
