@@ -1,6 +1,7 @@
 var cfg = {
 	chainConnection: {
-		development : "mysql://root:@localhost/app"
+		development : "mysql://root:@localhost/app",
+		production: "mysql://root:moreneitor@localhost/app"
 	},
 
 	localDependencies: [

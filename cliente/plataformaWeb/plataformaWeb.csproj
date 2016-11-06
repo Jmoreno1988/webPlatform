@@ -21,6 +21,7 @@
   <ItemGroup>
     <Content Include="app\cfg.js" />
     <Content Include="app\components\board-chess\board-chess.html" />
+    <Content Include="app\components\board-chess\chess.js" />
     <Content Include="app\components\bower_components\font-roboto\roboto.html" />
     <Content Include="app\components\bower_components\iron-a11y-announcer\.gitignore" />
     <Content Include="app\components\bower_components\iron-a11y-announcer\demo\index.html" />
