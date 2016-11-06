@@ -18,10 +18,11 @@ function main() {
     var sq = new Sequelize(cfg.chainConnection.development);
 
     var modelUsers = new ModelUsers('Users', sq, Sequelize);
+    var modelGames = new ModelGames('Games', sq, Sequelize);
 
     // Por cada nueva conexión
     io.on('connection', function(socket) {  
-        var handlerLogin = new HandlerLogin(socket, modelUsers.getModel(), sq);
+        var handlerLogin = new HandlerLogin(socket, modelUsers.getModel(), modelGames.getModel(), sq);
     
     });
 }

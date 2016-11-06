@@ -137,7 +137,7 @@
             nHeader.classList.add('moveUp');
             nBody.classList.add('moveDown');
 
-            this.fire('initSession');
+            this.fire('initSession', { userName: this.$.userName.value });
         },
 
         _close: function() {

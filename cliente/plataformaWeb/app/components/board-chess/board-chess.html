@@ -3,7 +3,25 @@
 <link rel=StyleSheet href="..\bower_components/chessboard-js\css/chessboard.css" type="text/css">
 <dom-module id="board-chess">
     <style>
+        :host {
+        }
+
+        paper-toolbar {
+                background: #33383a !important;
+            }
         #board {
+            width: 100%;
+        }
+
+        #paperDrawerPanelChess {
+            visibility: hidden;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+        }
+
+        #contentBoard{
+            margin: 30px auto;
             max-width: 500px;
             width: 100%;
             min-width: 300px;
@@ -11,7 +29,25 @@
     </style>
 
     <template>
-        <div id="board"></div>
+        <paper-drawer-panel id="paperDrawerPanelChess" force-narrow>
+            <div drawer>
+                <button tabindex="0" paper-drawer-toggle>Close drawer</button>
+                asd
+            </div>
+            <div main>
+                <paper-toolbar>
+                    <paper-icon-button icon="icons:menu" paper-drawer-toggle></paper-icon-button>
+                    <span class="title">Title</span>
+                    <paper-button>Info</paper-button>
+                    <paper-button id="buttonBackToMenu">Back</paper-button>
+                </paper-toolbar>
+                
+                <paper-material id="contentBoard" elevation="1">
+                    <div id="board"></div>
+                </paper-material>
+                                
+            </div>
+        </paper-drawer-panel>
 
     </template>
     <script>
@@ -21,12 +57,23 @@
             is: 'board-chess',
 
             properties: {
+                board: String
             },
 
             attached: function () {
-                var ruyLopez = 'r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R';
-                var board = new Chessboard('board');
-                this.$.board.addEventListener('click', function () { console.log(board.getPosition(ChessUtils.FEN.id))});
+               //var board = new Chessboard('board', this.board);
+                //this.$.board.addEventListener('click', function () { console.log(board.getPosition(ChessUtils.FEN.id)) });
+                this.$.buttonBackToMenu.addEventListener('click', function () { this._backToMenu() }.bind(this));
+                document.addEventListener('loadBoardChess', function (evt) { this._loadGame(evt.detail.board) }.bind(this))
+            },
+
+            _loadGame: function (board) {
+                this.$.paperDrawerPanelChess.style.visibility = 'visible';
+                var board = new Chessboard('board', board);
+            },
+
+            _backToMenu: function () {
+                this.$.paperDrawerPanelChess.style.visibility = 'hidden';
             }
         })
     </script>

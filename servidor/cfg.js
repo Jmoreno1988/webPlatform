@@ -6,6 +6,9 @@ var cfg = {
 	localDependencies: [
 		"/cfg.js",
 		"/models/ModelUsers.js",
+		"/models/ModelGames.js",
 		"/class/HandlerLogin.js"
-	]
+	],
+
+	colors: []
 }

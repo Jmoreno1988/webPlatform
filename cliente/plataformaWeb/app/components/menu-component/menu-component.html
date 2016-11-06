@@ -186,8 +186,10 @@
                 </paper-material>
 
                 <div id="contentGames">
+                    <!--
                     <card-game username = "Pedro Sanchez" state="your move"></card-game>
                     <card-game></card-game>
+                        -->
                 </div>
             </div>
         </paper-drawer-panel>
@@ -252,15 +254,30 @@
             },
 
             attached: function () {
-                document.addEventListener('initSession', function () { this._init() }.bind(this));
+                document.addEventListener('initSession', function (evt) { this._init(evt.detail) }.bind(this));
                 this.$$("#paper-fab").addEventListener('click', function () { this._toggleModal('createGameModal') }.bind(this));
                 this.$$("#buttonCancelRegister").addEventListener('click', function () { this._toggleModal('createGameModal') }.bind(this));
                 //this.$$("#buttonRandomOpponent").addEventListener('click', function () { this._getRandomUser() }.bind(this));
                 //this.$$(".buttonRemoveGame").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
             },
 
-            _init: function () {
+            _init: function (cfgInit) {
+                //this.style.visibility = "visible";
 
+                var socket = io.connect('http://localhost:3000', { 'forceNew': true });
+
+                socket.on('respondGetListGames', function (msg) {
+                    switch (msg.type) {
+                        case 200:
+                            this._inflateListGames(msg.data.games);
+                            break;
+                        case 400:
+                            this._showToast("error", "Error con la conexión al servidor");
+                            break;
+                    }
+                }.bind(this))
+
+                socket.emit('getListGames', { userName: cfgInit.userName });
             },
 
             _finish: function () {
@@ -292,7 +309,22 @@
             _remove: function () {
                 var parent = Polymer.dom(this).parentNode;
                 Polymer.dom(parent).removeChild(this);
-            }
+            },
+
+            _inflateListGames: function (listGames) {
+                this.$.contentGames.innerHTML = "";
+                for (var i = 0; i < listGames.length; i++) {
+                    var cardGame = document.createElement("card-game");
+                    cardGame.username = listGames[i].nameCreator;
+                    cardGame.board = listGames[i].board;
+                    this.$.contentGames.appendChild(cardGame);
+                }
+            },
+            _goToBoard: function () {
+            var node = document.createElement("board-chess");
+            node.board = this.board;
+            document.body.appendChild(node);
+        }
         });
 
     </script>

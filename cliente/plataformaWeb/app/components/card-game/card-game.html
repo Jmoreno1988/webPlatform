@@ -116,7 +116,7 @@
             <div class="colLastMove"> [[lastmove]] </div>
             <div class="colOptions">
                 <paper-icon-button id="buttonStart" class="yellow" icon="icons:star"></paper-icon-button>
-                <paper-icon-button class="green" icon="communication:chat"></paper-icon-button>
+                <!--<paper-icon-button class="green" icon="communication:chat"></paper-icon-button>-->
                 <paper-icon-button class="blue" icon="social:share"></paper-icon-button>
                 <paper-icon-button id="buttonRemoveGame" class="red" icon="icons:delete"></paper-icon-button>
             </div>
@@ -148,14 +148,15 @@
                 username: String,
                 state: String,
                 initgame: String,
-                lastmov: String
+                lastmov: String,
+                board: String
             },
 
             attached: function () {
                 this.$$("#buttonAcceptRemoveGame").addEventListener('click', function () { this._remove() }.bind(this));
                 this.$$("#buttonRemoveGame").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
                 this.$$("#buttonCancelRegister").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
-                this.$$("#buttonStart").addEventListener('click', function () { this._goToBoard() }.bind(this))
+                this.$$("#buttonStart").addEventListener('click', function () { this._loadBoard() }.bind(this))
             },
 
             _init: function () {
@@ -175,9 +176,17 @@
                 Polymer.dom(parent).removeChild(this);
             },
 
+            _loadBoard: function () {
+                this.fire('loadBoardChess', { board: this.board });
+            },
+
             _goToBoard: function () {
+
+                /*
                 var node = document.createElement("board-chess");
+                node.board = this.board;
                 document.body.appendChild(node);
+                */
             }
         });
 
