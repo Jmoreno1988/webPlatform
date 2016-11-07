@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `games` (
   `nameFollow` varchar(50) NOT NULL,
   `type` varchar(50) NOT NULL,
   `turn` varchar(50) NOT NULL DEFAULT '1',
-  `board` varchar(100) NOT NULL DEFAULT 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
+  `board` varchar(100) NOT NULL DEFAULT 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
   `updatedAt` datetime NOT NULL,
   `createdAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
@@ -56,16 +56,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `userName` (`userName`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla app.users: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla app.users: ~6 rows (aproximadamente)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `userName`, `password`, `email`, `reputation`, `wins`, `losses`, `stalemates`, `color`, `updatedAt`, `createdAt`) VALUES
 	(10, 'jose', 'jose', 'jose@gmail.com', 3, 0, 0, 0, NULL, '2016-11-05 21:34:13', '2016-11-05 21:34:13'),
 	(11, 'bot', 'bot', 'bot@noexisto.com', 3, 0, 0, 0, NULL, '2016-11-05 21:36:11', '2016-11-05 21:36:11'),
 	(12, 'bot2', 'bot2', 'bot2', 3, 0, 0, 0, NULL, '2016-11-05 21:58:38', '2016-11-05 21:58:38'),
 	(13, '', '', '', 3, 0, 0, 0, NULL, '2016-11-05 22:09:27', '2016-11-05 22:09:27'),
-	(14, 'sara', 'sara', 'sara@gmail.com', 3, 0, 0, 0, NULL, '2016-11-06 12:35:42', '2016-11-06 12:35:42');
+	(14, 'sara', 'sara', 'sara@gmail.com', 3, 0, 0, 0, NULL, '2016-11-06 12:35:42', '2016-11-06 12:35:42'),
+	(15, 'denis', 'denis', 'denis@gmail.com', 3, 0, 0, 0, NULL, '2016-11-07 18:11:42', '2016-11-07 18:11:42');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
