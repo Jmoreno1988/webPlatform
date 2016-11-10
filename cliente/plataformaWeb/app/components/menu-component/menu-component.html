@@ -312,10 +312,17 @@
             },
 
             _inflateListGames: function (listGames) {
+
+                console.log(listGames)
                 this.$.contentGames.innerHTML = "";
                 for (var i = 0; i < listGames.length; i++) {
                     var cardGame = document.createElement("card-game");
-                    cardGame.username = listGames[i].nameCreator;
+                    cardGame.creator = listGames[i].nameCreator;
+                    cardGame.follower = listGames[i].nameFollow;
+                    cardGame.initgame = listGames[i].createdAt;
+                    cardGame.lastmov = listGames[i].updateAt;
+                    cardGame.type = listGames[i].type;
+                    cardGame.turn = listGames[i].turn;
                     cardGame.board = listGames[i].board;
                     this.$.contentGames.appendChild(cardGame);
                 }

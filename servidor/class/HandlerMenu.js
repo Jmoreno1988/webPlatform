@@ -32,6 +32,7 @@ HandlerMenu.prototype.getListGames = function(userName) {
 HandlerMenu.prototype.getIdByUserName = function(userName) {
 	this.modelUser.findOne({ where: {userName: userName} }).then(function(user) {
    		this.modelGames.findAll({ where: {$or: [{idCreator: user.id}, {idFollow: user.id}]} }).then(function(games) {
+   			console.log(games[0])
 			this.socket.emit('respondGetListGames', {type: 200, data: {games: games}})
 		}.bind(this));
 	}.bind(this));

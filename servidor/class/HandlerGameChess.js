@@ -5,6 +5,4 @@ function HandlerGameChess(socket, modelUser, modelGames, sq) {
 	this.modelUser = modelUser;
 	this.modelGames = modelGames;
 	this.sq = sq;
-    
-	
 }

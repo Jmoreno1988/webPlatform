@@ -108,13 +108,14 @@
             <div class="colRival">
                 <paper-icon-item>
                     <div class="avatarGreen" item-icon></div>
-                    [[username]]
+                    [[labelGame]]
                 </paper-icon-item>
             </div>
-            <div class="colState"> [[state]] </div>
-            <div class="colInitGame"> [[initgame]] </div>
-            <div class="colLastMove"> [[lastmove]] </div>
-            <div class="colOptions">
+            <div class=""> [[type]] </div>
+            <div class=""> [[state]] </div>
+            <div class=""> [[initgame]] </div>
+            <div class=""> [[lastmove]] </div>
+            <div class="">
                 <paper-icon-button id="buttonStart" class="yellow" icon="icons:star"></paper-icon-button>
                 <!--<paper-icon-button class="green" icon="communication:chat"></paper-icon-button>-->
                 <paper-icon-button class="blue" icon="social:share"></paper-icon-button>
@@ -145,11 +146,16 @@
             is: 'card-game',
 
             properties: {
-                username: String,
+                creator: String,
+                follower: String,
+                type: String,
+                turn: String,
                 state: String,
                 initgame: String,
                 lastmov: String,
-                board: String
+                board: String,
+
+                labelGame: String
             },
 
             attached: function () {
@@ -157,6 +163,9 @@
                 this.$$("#buttonRemoveGame").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
                 this.$$("#buttonCancelRegister").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
                 this.$$("#buttonStart").addEventListener('click', function () { this._loadBoard() }.bind(this))
+
+                this.labelGame = this.creator + " VS " + this.follower;
+                (parseInt(this.turn) % 2 == 1) ? this.state = "white" : this.state = "black";
             },
 
             _init: function () {
