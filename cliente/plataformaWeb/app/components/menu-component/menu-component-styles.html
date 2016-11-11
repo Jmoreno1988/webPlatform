@@ -1,0 +1,182 @@
+﻿<dom-module id="menu-component-styles">
+    <template>
+        <style>
+            :host {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            paper-toolbar {
+                background: #33383a !important;
+            }
+
+            paper-toolbar paper-button {
+                color: #00b4f0 !important;
+            }
+
+            paper-dropdown-menu {
+                width: 100px;
+            }
+
+            .avatarRed {
+                width: 35px;
+                height: 35px;
+                background-color: #F44336;
+                border-radius: 50%;
+                margin: 0 10px 0 0;
+                float: left;
+            }
+
+            .avatarGreen {
+                width: 35px;
+                height: 35px;
+                background-color: #8BC34A;
+                border-radius: 50%;
+                margin: 0 10px 0 0;
+            }
+
+            .fontGreen {
+                color: #8BC34A;
+            }
+
+            .fontRed {
+                color: #F44336;
+            }
+
+            .yellow {
+                color: #FFEB3B;
+            }
+
+            .red {
+                color: #F44336;
+            }
+
+            .green {
+                color: #8BC34A;
+            }
+
+            .blue {
+                color: #2196F3;
+            }
+
+            .campHeadList {
+                text-align: center;
+            }
+
+            .colRival {
+                text-align: center;
+                width: 30%;
+            }
+
+            .colState {
+                text-align: center;
+                width: 15%;
+            }
+
+            .colInitGame {
+                text-align: center;
+                width: 15%;
+            }
+
+            .colLastMove {
+                text-align: center;
+                width: 15%;
+            }
+
+            .colOptions {
+                text-align: center;
+                width: 25%;
+            }
+
+            .campRival {
+                text-align: center;
+                width: 30%;
+            }
+
+            #simple {
+                height: 300px;
+            }
+
+            #searchInput {
+                width: 200px;
+            }
+
+            #createGameModal {
+                border-top: 10px solid #F44336;
+            }
+
+            #buttonRandomOpponent {
+                cursor: pointer;
+            }
+
+            #inputSearchUser {
+                margin-top: -10px;
+            }
+
+            #buttonRandomOpponent{
+                margin-top: -5px;
+                float: right;
+            }
+
+            #comboTime {
+                width: 115px;
+            }
+
+            #comboColors {
+                margin: -43px 0 0 150px;
+                width: 115px;
+            }
+
+            #reminderNewGame {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 500px;
+                height: 500px;
+                transform: translate(90%, 90%);
+                background-color: #4CAF50;
+                border-radius: 50%;
+                transition: all .3s;
+            }
+
+            .inflateReminderNewGame {
+                -ms-transform: translate(50%, 50%)!important;
+                -webkit-transform: translate(50%, 50%)!important;
+                transform: translate(50%, 50%)!important;
+            }
+
+            #textReminderNewGame {
+                width: 150px;
+                height: 100px!important;
+                margin: 125px 0 0 60px;
+                color: white;
+            }
+
+
+            #paper-fab {
+                background-color: #ff3a39 !important;
+                position: absolute !important;
+                bottom: 30px;
+                right: 30px;
+                z-index: 1 !important;
+            }
+            
+            .beat {
+                animation: beat 1s normal!important;
+            }
+
+            @keyframes beat {
+                0% { transform: scale(1); }
+                20% { transform: scale(1.15); }
+                40% { transform: scale(1); }
+                60% { transform: scale(1.15); }
+                80% { transform: scale(1); }
+                100% { transform: scale(1); }
+            }
+            
+        </style>
+    </template>
+</dom-module>

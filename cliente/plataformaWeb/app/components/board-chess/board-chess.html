@@ -71,9 +71,9 @@
             _loadGame: function (board) {
                 this.$.paperDrawerPanelChess.style.visibility = 'visible';
                 var chess = new Chess();
-                chess.load('r1bqk2r/pppppN1p/2n2npb/8/8/2N5/PPPPPPPP/R1BQKB1R w KQkq - 1 5');
+                chess.load(board);
                 var board = new Chessboard('board', {
-                    position: 'r1bqk2r/pppppN1p/2n2npb/8/8/2N5/PPPPPPPP/R1BQKB1R w KQkq - 1 5',
+                    position: board,
                     eventHandlers: {
                         onPieceSelected: pieceSelected,
                         onMove: pieceMove

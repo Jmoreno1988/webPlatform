@@ -1,4 +1,5 @@
-﻿<link rel="import" href="..\bower_components\vaadin-grid\vaadin-grid.html">
+﻿
+<link rel="import" href="..\bower_components\vaadin-grid\vaadin-grid.html">
 <link rel="import" href="..\bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="..\bower_components\paper-toolbar\paper-toolbar.html">
 <link rel="import" href="..\bower_components\paper-icon-button\paper-icon-button.html">
@@ -16,151 +17,13 @@
 <link rel="import" href="..\bower_components\iron-icons\communication-icons.html">
 <link rel="import" href="..\bower_components\paper-dropdown-menu\paper-dropdown-menu.html">
 <link rel="import" href="..\card-game\card-game.html">
+<link rel="import" href="menu-component-styles.html">
 
 <dom-module id="menu-component">
+
+    <style is="custom-style" include="menu-component-styles"></style>
+
     <template>
-        <style>
-            :host {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-            }
-
-            vaadin-grid {
-                z-index: 0 !important;
-            }
-
-            paper-toolbar {
-                background: #33383a !important;
-            }
-
-            paper-fab {
-                background-color: #ff3a39 !important;
-                position: absolute !important;
-                bottom: 30px;
-                right: 30px;
-                z-index: 1 !important;
-            }
-
-            paper-toolbar paper-button {
-                color: #00b4f0 !important;
-            }
-
-            paper-dropdown-menu {
-                width: 100px;
-            }
-
-            .avatarRed {
-                width: 35px;
-                height: 35px;
-                background-color: #F44336;
-                border-radius: 50%;
-                margin: 0 10px 0 0;
-                float: left;
-            }
-
-            .avatarGreen {
-                width: 35px;
-                height: 35px;
-                background-color: #8BC34A;
-                border-radius: 50%;
-                margin: 0 10px 0 0;
-            }
-
-            .fontGreen {
-                color: #8BC34A;
-            }
-
-            .fontRed {
-                color: #F44336;
-            }
-
-            .yellow {
-                color: #FFEB3B;
-            }
-
-            .red {
-                color: #F44336;
-            }
-
-            .green {
-                color: #8BC34A;
-            }
-
-            .blue {
-                color: #2196F3;
-            }
-
-            .campHeadList {
-                text-align: center;
-            }
-
-            .colRival {
-                text-align: center;
-                width: 30%;
-            }
-
-            .colState {
-                text-align: center;
-                width: 15%;
-            }
-
-            .colInitGame {
-                text-align: center;
-                width: 15%;
-            }
-
-            .colLastMove {
-                text-align: center;
-                width: 15%;
-            }
-
-            .colOptions {
-                text-align: center;
-                width: 25%;
-            }
-
-            .campRival {
-                text-align: center;
-                width: 30%;
-            }
-
-            #simple {
-                height: 300px;
-            }
-
-            #searchInput {
-                width: 200px;
-            }
-
-            #createGameModal {
-                border-top: 10px solid #F44336;
-            }
-
-            #buttonRandomOpponent {
-                cursor: pointer;
-            }
-
-            #inputSearchUser {
-                margin-top: -10px;
-            }
-
-            #buttonRandomOpponent{
-                margin-top: -5px;
-                float: right;
-            }
-
-            #comboTime {
-                width: 115px;
-            }
-
-            #comboColors {
-                margin: -43px 0 0 150px;
-                width: 115px;
-            }
-        </style>
         <paper-drawer-panel id="paperDrawerPanel" force-narrow>
             <div drawer>
                 <button tabindex="0" paper-drawer-toggle>Close drawer</button>
@@ -173,7 +36,6 @@
                     <paper-button on-click="_finish">Logout</paper-button>
                 </paper-toolbar>
 
-                <paper-fab id="paper-fab" icon="add" title="add"></paper-fab>
 
                 <paper-material elevation="1">
                     <paper-item>
@@ -190,6 +52,11 @@
                     <card-game username = "Pedro Sanchez" state="your move"></card-game>
                     <card-game></card-game>
                         -->
+                </div>
+                
+                <paper-fab id="paper-fab" icon="add" title="add"></paper-fab>
+                <div id="reminderNewGame">
+                    <div id="textReminderNewGame">Click to create a New Game! </div>
                 </div>
             </div>
         </paper-drawer-panel>
@@ -259,6 +126,11 @@
                 this.$$("#buttonCancelRegister").addEventListener('click', function () { this._toggleModal('createGameModal') }.bind(this));
                 //this.$$("#buttonRandomOpponent").addEventListener('click', function () { this._getRandomUser() }.bind(this));
                 //this.$$(".buttonRemoveGame").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
+
+                    this.$$("#paper-fab").addEventListener('click', function () {
+                       // this.$$("#reminderNewGame").classList.toggle("inflateReminderNewGame");
+                       // this.$$("#paper-fab").classList.add('beat');
+                }.bind(this));
             },
 
             _init: function (cfgInit) {
