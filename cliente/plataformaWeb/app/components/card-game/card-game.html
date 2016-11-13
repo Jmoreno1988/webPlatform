@@ -16,6 +16,7 @@
 <link rel="import" href="..\bower_components\iron-icons\communication-icons.html">
 <link rel="import" href="..\bower_components\paper-dropdown-menu\paper-dropdown-menu.html">
 <link rel="import" href="..\bower_components\vaadin-combo-box\vaadin-combo-box.html">
+<link rel="import" href="..\bower_components\paper-card\paper-card.html">
 <link rel="import" href="..\board-chess/board-chess.html">
 
 <dom-module id="card-game">
@@ -99,11 +100,31 @@
                 width: 30%;
             }
 
-            #modalRemoveGame {
+            .modal {
                 border-top: 10px solid #F44336;
             }
-        </style>
 
+             #card {
+                                margin-top: 20px;
+                                width: 300px;
+                            }
+
+                            paper-card.white {
+                                --paper-card-header-color: red;
+                            }
+
+                            .avatarGreen {
+                                width: 35px;
+                                height: 35px;
+                                background-color: #8BC34A;
+                                border-radius: 50%;
+                            }
+
+                            paper-icon-item {
+                                margin: -10px 0 0 -15px;
+                            }
+        </style>
+        <!--
         <paper-item>
             <div class="colRival">
                 <paper-icon-item>
@@ -117,17 +138,33 @@
             <div class=""> [[lastmove]] </div>
             <div class="">
                 <paper-icon-button id="buttonStart" class="yellow" icon="icons:star"></paper-icon-button>
-                <!--<paper-icon-button class="green" icon="communication:chat"></paper-icon-button>-->
-                <paper-icon-button class="blue" icon="social:share"></paper-icon-button>
+                <paper-icon-button id="buttonShare" class="blue" icon="social:share"></paper-icon-button>
                 <paper-icon-button id="buttonRemoveGame" class="red" icon="icons:delete"></paper-icon-button>
             </div>
         </paper-item>
+-->
+        <paper-card id="card" heading="" image="" alt="" class="" style="margin-bottom:8px;">
+            <div id="card-content" class="card-content">
+                <paper-icon-item>
+                    <div class="avatarGreen" item-icon></div>
+                    <h3>[[labelGame]]</h3>
+                </paper-icon-item>
+                <div> Type: [[type]] </div>
+                <div> State: [[state]] </div>
+                <div> Last move: [[lastmove]] </div>
+            </div>
+            <div class="card-actions">
+                <paper-icon-button class="yellow" icon="icons:star"></paper-icon-button>
+                <paper-icon-button class="blue" id="buttonShare" icon="social:share"></paper-icon-button>
+                <paper-icon-button class="red" id="buttonRemoveGame" icon="icons:delete"></paper-icon-button>
+            </div>
+        </paper-card>
 
 
 
         <!-- Ventanas modales -->
         <!--  Borrar partida  -->
-        <paper-dialog id="modalRemoveGame" modal>
+        <paper-dialog id="modalRemoveGame" class="modal" modal>
             <h2>Remove game</h2>
 
             <div> Are you sure? </div>
@@ -135,6 +172,26 @@
             <div class="buttons">
                 <paper-button id="buttonCancelRegister">Cancel</paper-button>
                 <paper-button id="buttonAcceptRemoveGame">Accept</paper-button>
+            </div>
+        </paper-dialog>
+
+        <!-- Share -->
+        <paper-dialog id="modalShare" class="modal" modal>
+            <h2>Share</h2>
+            <paper-icon-item>
+                <iron-icon icon="icons:facebook"></iron-icon> Facebook
+            </paper-icon-item>
+            <paper-icon-item>
+                <iron-icon icon="twitter"></iron-icon> Twitter
+            </paper-icon-item>
+            <paper-icon-item>
+                <iron-icon icon="g+"></iron-icon> Google +
+            </paper-icon-item>
+            <paper-icon-item>
+                <iron-icon icon="mail"></iron-icon> Email
+            </paper-icon-item>
+            <div class="buttons">
+                <paper-button id="buttonCancelShare">Back</paper-button>
             </div>
         </paper-dialog>
 
@@ -162,9 +219,11 @@
                 this.$$("#buttonAcceptRemoveGame").addEventListener('click', function () { this._remove() }.bind(this));
                 this.$$("#buttonRemoveGame").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
                 this.$$("#buttonCancelRegister").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
-                this.$$("#buttonStart").addEventListener('click', function () { this._loadBoard() }.bind(this))
-
-                this.labelGame = this.creator + " VS " + this.follower;
+                this.$$("#card-content").addEventListener('click', function () { this._loadBoard() }.bind(this))
+                this.$$("#buttonShare").addEventListener('click', function () { this._toggleModal('modalShare') }.bind(this));
+                this.$$("#buttonCancelShare").addEventListener('click', function () { this._toggleModal('modalShare') }.bind(this));
+                //this.labelGame = this.creator + " VS " + this.follower;
+                this.labelGame = this.follower;
                 (parseInt(this.turn) % 2 == 1) ? this.state = "white" : this.state = "black";
             },
 

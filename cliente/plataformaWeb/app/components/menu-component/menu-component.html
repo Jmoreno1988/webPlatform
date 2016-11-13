@@ -29,36 +29,37 @@
                 <button tabindex="0" paper-drawer-toggle>Close drawer</button>
             </div>
             <div main>
-                <paper-toolbar>
-                    <paper-icon-button icon="icons:menu" paper-drawer-toggle></paper-icon-button>
-                    <span class="title">Title</span>
-                    <paper-button onclick="toggleModal('modal1')">Info</paper-button>
-                    <paper-button on-click="_finish">Logout</paper-button>
-                </paper-toolbar>
-
-
                 <paper-material elevation="1">
-                    <paper-item>
-                        <div class="colRival"> Rival </div>
-                        <div class="colState"> State game </div>
-                        <div class="colInitGame"> Init game </div>
-                        <div class="colLastMove"> Last Mov. </div>
-                        <div class="colOptions"> Options </div>
-                    </paper-item>
+                    <paper-toolbar>
+                        <paper-icon-button icon="icons:menu" paper-drawer-toggle></paper-icon-button>
+                        <span class="title">Title</span>
+                        <paper-button onclick="toggleModal('modal1')">Info</paper-button>
+                        <paper-button on-click="_finish">Logout</paper-button>
+                    </paper-toolbar>
                 </paper-material>
-
-                <div id="contentGames">
                     <!--
-                    <card-game username = "Pedro Sanchez" state="your move"></card-game>
-                    <card-game></card-game>
-                        -->
-                </div>
-                
-                <paper-fab id="paper-fab" icon="add" title="add"></paper-fab>
-                <div id="reminderNewGame">
-                    <div id="textReminderNewGame">Click to create a New Game! </div>
-                </div>
-            </div>
+        <paper-material elevation="1">
+            <paper-item>
+                <div class="colRival"> Rival </div>
+                <div class="colState"> State game </div>
+                <div class="colInitGame"> Init game </div>
+                <div class="colLastMove"> Last Mov. </div>
+                <div class="colOptions"> Options </div>
+            </paper-item>
+        </paper-material>
+            -->
+                    <div id="contentGames">
+                        <style is="custom-style">
+                           
+                        </style>
+                        
+                    </div>
+
+                    <paper-fab id="paper-fab" icon="add" title="add"></paper-fab>
+                    <div id="reminderNewGame">
+                        <div id="textReminderNewGame">Click to create a New Game! </div>
+                    </div>
+</div>
         </paper-drawer-panel>
 
 
@@ -105,6 +106,7 @@
                 <paper-button id="buttonCreateRegister" onclick="">Create</paper-button>
             </div>
         </paper-dialog>
+
         
         <!-- Aux. components -->
         <toast-component></toast-component>
@@ -124,6 +126,7 @@
                 document.addEventListener('initSession', function (evt) { this._init(evt.detail) }.bind(this));
                 this.$$("#paper-fab").addEventListener('click', function () { this._toggleModal('createGameModal') }.bind(this));
                 this.$$("#buttonCancelRegister").addEventListener('click', function () { this._toggleModal('createGameModal') }.bind(this));
+                
                 //this.$$("#buttonRandomOpponent").addEventListener('click', function () { this._getRandomUser() }.bind(this));
                 //this.$$(".buttonRemoveGame").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
 
@@ -137,7 +140,7 @@
                 //this.style.visibility = "visible";
 
                 var socket = io.connect('http://localhost:3000', { 'forceNew': true });
-
+        
                 socket.on('respondGetListGames', function (msg) {
                     switch (msg.type) {
                         case 200:
@@ -148,7 +151,7 @@
                             break;
                     }
                 }.bind(this))
-
+                
                 socket.emit('getListGames', { userName: cfgInit.userName });
             },
 
