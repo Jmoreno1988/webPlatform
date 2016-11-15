@@ -1,4 +1,5 @@
-﻿<link rel="import" href="..\bower_components\vaadin-grid\vaadin-grid.html">
+﻿<link rel="import" href="card-game-styles.html">
+<link rel="import" href="..\bower_components\vaadin-grid\vaadin-grid.html">
 <link rel="import" href="..\bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="..\bower_components\paper-toolbar\paper-toolbar.html">
 <link rel="import" href="..\bower_components\paper-icon-button\paper-icon-button.html">
@@ -20,129 +21,11 @@
 <link rel="import" href="..\board-chess/board-chess.html">
 
 <dom-module id="card-game">
+
+    <style is="custom-style" include="card-game-styles"></style>
+
     <template>
-        <style>
-            :host {
-            }
 
-            paper-item {
-                border-bottom: 1px solid rgba(158, 158, 158, .5);
-            }
-
-            .avatarRed {
-                width: 35px;
-                height: 35px;
-                background-color: #F44336;
-                border-radius: 50%;
-                margin: 0 10px 0 0;
-                float: left;
-            }
-
-            .avatarGreen {
-                width: 35px;
-                height: 35px;
-                background-color: #8BC34A;
-                border-radius: 50%;
-                margin: 0 10px 0 0;
-            }
-
-            .fontGreen {
-                color: #8BC34A;
-            }
-
-            .fontRed {
-                color: #F44336;
-            }
-
-            .yellow {
-                color: #FFEB3B;
-            }
-
-            .red {
-                color: #F44336;
-            }
-
-            .green {
-                color: #8BC34A;
-            }
-
-            .blue {
-                color: #2196F3;
-            }
-
-            .colRival {
-                text-align: center;
-                width: 30%;
-            }
-
-            .colState {
-                text-align: center;
-                width: 15%;
-            }
-
-            .colInitGame {
-                text-align: center;
-                width: 15%;
-            }
-
-            .colLastMove {
-                text-align: center;
-                width: 15%;
-            }
-
-            .colOptions {
-                text-align: center;
-                width: 25%;
-            }
-
-            .campRival {
-                text-align: center;
-                width: 30%;
-            }
-
-            .modal {
-                border-top: 10px solid #F44336;
-            }
-
-             #card {
-                                margin-top: 20px;
-                                width: 300px;
-                            }
-
-                            paper-card.white {
-                                --paper-card-header-color: red;
-                            }
-
-                            .avatarGreen {
-                                width: 35px;
-                                height: 35px;
-                                background-color: #8BC34A;
-                                border-radius: 50%;
-                            }
-
-                            paper-icon-item {
-                                margin: -10px 0 0 -15px;
-                            }
-        </style>
-        <!--
-        <paper-item>
-            <div class="colRival">
-                <paper-icon-item>
-                    <div class="avatarGreen" item-icon></div>
-                    [[labelGame]]
-                </paper-icon-item>
-            </div>
-            <div class=""> [[type]] </div>
-            <div class=""> [[state]] </div>
-            <div class=""> [[initgame]] </div>
-            <div class=""> [[lastmove]] </div>
-            <div class="">
-                <paper-icon-button id="buttonStart" class="yellow" icon="icons:star"></paper-icon-button>
-                <paper-icon-button id="buttonShare" class="blue" icon="social:share"></paper-icon-button>
-                <paper-icon-button id="buttonRemoveGame" class="red" icon="icons:delete"></paper-icon-button>
-            </div>
-        </paper-item>
--->
         <paper-card id="card" heading="" image="" alt="" class="" style="margin-bottom:8px;">
             <div id="card-content" class="card-content">
                 <paper-icon-item>
@@ -159,7 +42,6 @@
                 <paper-icon-button class="red" id="buttonRemoveGame" icon="icons:delete"></paper-icon-button>
             </div>
         </paper-card>
-
 
 
         <!-- Ventanas modales -->
@@ -196,67 +78,7 @@
         </paper-dialog>
 
     </template>
-    <script>
+    
+    <script type="text/javascript" src="card-game.js"></script>
 
-        Polymer({
-
-            is: 'card-game',
-
-            properties: {
-                creator: String,
-                follower: String,
-                type: String,
-                turn: String,
-                state: String,
-                initgame: String,
-                lastmov: String,
-                board: String,
-
-                labelGame: String
-            },
-
-            attached: function () {
-                this.$$("#buttonAcceptRemoveGame").addEventListener('click', function () { this._remove() }.bind(this));
-                this.$$("#buttonRemoveGame").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
-                this.$$("#buttonCancelRegister").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
-                this.$$("#card-content").addEventListener('click', function () { this._loadBoard() }.bind(this))
-                this.$$("#buttonShare").addEventListener('click', function () { this._toggleModal('modalShare') }.bind(this));
-                this.$$("#buttonCancelShare").addEventListener('click', function () { this._toggleModal('modalShare') }.bind(this));
-                //this.labelGame = this.creator + " VS " + this.follower;
-                this.labelGame = this.follower;
-                (parseInt(this.turn) % 2 == 1) ? this.state = "white" : this.state = "black";
-            },
-
-            _init: function () {
-
-            },
-
-            _finish: function () {
-            },
-
-            _toggleModal: function (id) {
-                document.querySelector("#" + id).toggle();
-            },
-
-            _remove: function () {
-                //socket.emit('getRandomUser', {});
-                var parent = Polymer.dom(this).parentNode;
-                Polymer.dom(parent).removeChild(this);
-            },
-
-            _loadBoard: function () {
-                this.fire('loadBoardChess', { board: this.board });
-            },
-
-            _goToBoard: function () {
-
-                /*
-                var node = document.createElement("board-chess");
-                node.board = this.board;
-                document.body.appendChild(node);
-                */
-            }
-        });
-
-    </script>
 </dom-module>

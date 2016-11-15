@@ -1,5 +1,4 @@
-﻿
-<link rel="import" href="..\bower_components\vaadin-grid\vaadin-grid.html">
+﻿<link rel="import" href="..\bower_components\vaadin-grid\vaadin-grid.html">
 <link rel="import" href="..\bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="..\bower_components\paper-toolbar\paper-toolbar.html">
 <link rel="import" href="..\bower_components\paper-icon-button\paper-icon-button.html">
@@ -37,29 +36,29 @@
                         <paper-button on-click="_finish">Logout</paper-button>
                     </paper-toolbar>
                 </paper-material>
-                    <!--
-        <paper-material elevation="1">
-            <paper-item>
-                <div class="colRival"> Rival </div>
-                <div class="colState"> State game </div>
-                <div class="colInitGame"> Init game </div>
-                <div class="colLastMove"> Last Mov. </div>
-                <div class="colOptions"> Options </div>
-            </paper-item>
-        </paper-material>
-            -->
-                    <div id="contentGames">
-                        <style is="custom-style">
-                           
-                        </style>
-                        
-                    </div>
+                <!--
+                <paper-material elevation="1">
+                    <paper-item>
+                        <div class="colRival"> Rival </div>
+                        <div class="colState"> State game </div>
+                        <div class="colInitGame"> Init game </div>
+                        <div class="colLastMove"> Last Mov. </div>
+                        <div class="colOptions"> Options </div>
+                    </paper-item>
+                </paper-material>
+                    -->
+                <div id="contentGames">
+                    <style is="custom-style">
 
-                    <paper-fab id="paper-fab" icon="add" title="add"></paper-fab>
-                    <div id="reminderNewGame">
-                        <div id="textReminderNewGame">Click to create a New Game! </div>
-                    </div>
-</div>
+                    </style>
+
+                </div>
+
+                <paper-fab id="paper-fab" icon="add" title="add"></paper-fab>
+                <div id="reminderNewGame">
+                    <div id="textReminderNewGame">Click to create a New Game! </div>
+                </div>
+            </div>
         </paper-drawer-panel>
 
 
@@ -71,8 +70,8 @@
             <paper-button id="buttonRandomOpponent" class="blue">Random opponent</paper-button>
 
             <paper-input label="Search users" id="inputSearchUser">
-                <paper-icon-button suffix  icon="search" alt="search" title="search"></paper-icon-button>
-                <paper-icon-button suffix  icon="clear" alt="clear" title="clear"></paper-icon-button>
+                <paper-icon-button suffix icon="search" alt="search" title="search"></paper-icon-button>
+                <paper-icon-button suffix icon="clear" alt="clear" title="clear"></paper-icon-button>
             </paper-input>
 
             <paper-dropdown-menu id="" label="Color">
@@ -107,107 +106,12 @@
             </div>
         </paper-dialog>
 
-        
+
         <!-- Aux. components -->
         <toast-component></toast-component>
 
     </template>
-    <script>
 
-        Polymer({
+    <script type="text/javascript" src="menu-component.js"></script>
 
-            is: 'menu-component',
-
-            properties: {
-
-            },
-
-            attached: function () {
-                document.addEventListener('initSession', function (evt) { this._init(evt.detail) }.bind(this));
-                this.$$("#paper-fab").addEventListener('click', function () { this._toggleModal('createGameModal') }.bind(this));
-                this.$$("#buttonCancelRegister").addEventListener('click', function () { this._toggleModal('createGameModal') }.bind(this));
-                
-                //this.$$("#buttonRandomOpponent").addEventListener('click', function () { this._getRandomUser() }.bind(this));
-                //this.$$(".buttonRemoveGame").addEventListener('click', function () { this._toggleModal('modalRemoveGame') }.bind(this));
-
-                    this.$$("#paper-fab").addEventListener('click', function () {
-                       // this.$$("#reminderNewGame").classList.toggle("inflateReminderNewGame");
-                       // this.$$("#paper-fab").classList.add('beat');
-                }.bind(this));
-            },
-
-            _init: function (cfgInit) {
-                //this.style.visibility = "visible";
-
-                var socket = io.connect('http://localhost:3000', { 'forceNew': true });
-        
-                socket.on('respondGetListGames', function (msg) {
-                    switch (msg.type) {
-                        case 200:
-                            this._inflateListGames(msg.data.games);
-                            break;
-                        case 400:
-                            this._showToast("error", "Error con la conexión al servidor");
-                            break;
-                    }
-                }.bind(this))
-                
-                socket.emit('getListGames', { userName: cfgInit.userName });
-            },
-
-            _finish: function () {
-                // Activar login
-                this.fire('closeSession');
-            },
-
-            _toggleModal: function (id) {
-                document.querySelector("#" + id).toggle();
-            },
-
-            _getRandomUser: function () {
-                var socket = io.connect('http://localhost:3000', { 'forceNew': true });
-
-                socket.on('respondGetRandomUser', function (msg) {
-                    switch (msg.type) {
-                        case 200:
-                            this._enter();
-                            break;
-                        case 400:
-                            this._showToast("error", "Error con la conexión al servidor");
-                            break;
-                    }
-                }.bind(this))
-
-                socket.emit('getRandomUser', {});
-            },
-
-            _remove: function () {
-                var parent = Polymer.dom(this).parentNode;
-                Polymer.dom(parent).removeChild(this);
-            },
-
-            _inflateListGames: function (listGames) {
-
-                console.log(listGames)
-                this.$.contentGames.innerHTML = "";
-                for (var i = 0; i < listGames.length; i++) {
-                    var cardGame = document.createElement("card-game");
-                    cardGame.creator = listGames[i].nameCreator;
-                    cardGame.follower = listGames[i].nameFollow;
-                    cardGame.initgame = listGames[i].createdAt;
-                    cardGame.lastmov = listGames[i].updateAt;
-                    cardGame.type = listGames[i].type;
-                    cardGame.turn = listGames[i].turn;
-                    cardGame.board = listGames[i].board;
-                    this.$.contentGames.appendChild(cardGame);
-                }
-            },
-            _goToBoard: function () {
-            var node = document.createElement("board-chess");
-            node.board = this.board;
-            document.body.appendChild(node);
-        }
-        });
-
-    </script>
 </dom-module>

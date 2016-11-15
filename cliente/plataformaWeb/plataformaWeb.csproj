@@ -20,7 +20,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app\cfg.js" />
+    <Content Include="app\components\board-chess\board-chess-styles.html" />
     <Content Include="app\components\board-chess\board-chess.html" />
+    <Content Include="app\components\board-chess\board-chess.js" />
     <Content Include="app\components\board-chess\chess.js" />
     <Content Include="app\components\bower_components\font-roboto\roboto.html" />
     <Content Include="app\components\bower_components\iron-a11y-announcer\.gitignore" />
@@ -156,7 +158,9 @@
     <Content Include="app\components\bower_components\webcomponentsjs\webcomponents.min.js" />
     <Content Include="app\components\card-game\card-game-styles.html" />
     <Content Include="app\components\card-game\card-game.html" />
+    <Content Include="app\components\card-game\card-game.js" />
     <Content Include="app\components\login-component\images\logo.png" />
+    <Content Include="app\components\login-component\login-component-styles.html" />
     <Content Include="app\components\login-component\login-component.html" />
     <Content Include="app\components\login-component\login-component.js" />
     <Content Include="app\components\menu-component\menu-component.html" />

@@ -24,7 +24,7 @@ function main() {
     io.on('connection', function(socket) {
         var handlerLogin = new HandlerLogin(socket, modelUsers.getModel(), sq);
         var handlerMenu = new HandlerMenu(socket, modelUsers.getModel(), modelGames.getModel(), sq);
-        var handlerGameChess = new HandlerGameChess(socket, modelUsers.getModel(), modelGames.getModel(), sq);
+        //var handlerGameChess = new HandlerGameChess(socket, modelUsers.getModel(), modelGames.getModel(), sq);
     });
 }
 

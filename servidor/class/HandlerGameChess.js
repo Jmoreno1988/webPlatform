@@ -6,10 +6,15 @@ function HandlerGameChess(socket, modelUser, modelGames, sq) {
 	this.modelGames = modelGames;
 	this.sq = sq;
 
-	socket.on('getRandomUser', function(data) { this.getRandomUser() }.bind(this));
-    socket.on('getListGames', function(data) { this.getListGames(data.userName) }.bind(this));
+	//socket.on('getRandomUser', function(data) { this.getRandomUser() }.bind(this));
+    //socket.on('getListGames', function(data) { this.getListGames(data.userName) }.bind(this));
 }
 
 HandlerGameChess.prototype.saveGame = function() {
 
 }
+
+// Movimiento
+// Mandar fen al servidor
+// Actualizar registro BBDD (fen, updateAt, turn...)
+// informar al otro del Movimiento
