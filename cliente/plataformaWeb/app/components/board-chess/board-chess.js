@@ -59,7 +59,16 @@
             this._updateGameInfo(status);
         }
 
-        return this.chess.fen();
+
+        // Mandar fen al servidor
+        var socket = io.connect('http://localhost:3000', { 'forceNew': true });
+        socket.emit('sendFen', {
+            user: this.$.userName.value,
+            fen: this.chess.fen()
+        })
+        
+
+        //return this.chess.fen();
     },
 
 
