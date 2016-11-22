@@ -12,7 +12,7 @@
         <paper-drawer-panel id="paperDrawerPanelChess" force-narrow>
             <div drawer>
                 <button tabindex="0" paper-drawer-toggle>Close drawer</button>
-                asd
+
             </div>
             <div main>
                 <paper-toolbar>
@@ -25,10 +25,25 @@
                 <paper-material id="contentBoard" elevation="1">
                     <div id="board"></div>
                 </paper-material>
+
+                <paper-material id="contentInfo" elevation="1">
+                    <div id="infoGame">
+                        <span> Status: </span>
+                        <span id="info-status"></span>
+                    </div>
+                    <div id="infoGame">
+                        <span> Fen: </span>
+                        <span id="info-fen"></span>
+                    </div>
+                    <div id="infoGame">
+                        <span> PNG: </span>
+                        <span id="info-pgn"></span>
+                    </div>
+                </paper-material>
             </div>
         </paper-drawer-panel>
     </template>
     
-    <style is="custom-style" include="board-chess.js"></style>
+    <script src="board-chess.js"></script>
 
 </dom-module>

@@ -10,7 +10,7 @@
         state: String,
         initgame: String,
         lastmov: String,
-        board: String,
+        fen: String,
 
         labelGame: String
     },
@@ -45,7 +45,7 @@
     },
 
     _loadBoard: function () {
-        this.fire('loadBoardChess', { board: this.board });
+        this.fire('loadBoardChess', { fen: this.fen });
     },
 
     _goToBoard: function () {

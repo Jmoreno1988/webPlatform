@@ -72,8 +72,8 @@
 
     _inflateListGames: function (listGames) {
 
-        console.log(listGames)
         this.$.contentGames.innerHTML = "";
+
         for (var i = 0; i < listGames.length; i++) {
             var cardGame = document.createElement("card-game");
             cardGame.creator = listGames[i].nameCreator;
@@ -82,7 +82,7 @@
             cardGame.lastmov = listGames[i].updateAt;
             cardGame.type = listGames[i].type;
             cardGame.turn = listGames[i].turn;
-            cardGame.board = listGames[i].board;
+            cardGame.fen = listGames[i].board; // Cambiar en la bbdd board to fen
             this.$.contentGames.appendChild(cardGame);
         }
     },
