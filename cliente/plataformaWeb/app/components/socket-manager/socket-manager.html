@@ -1,0 +1,35 @@
+﻿<dom-module id="socket-manager">
+    
+    <script type="text/javascript">
+        Polymer({
+
+            is: 'socket-manager',
+
+            properties: {
+                socket: {
+                    type: Object,
+                    notify: true,
+                    value: null
+                }
+            },
+
+            attached: function () { },
+
+            createSocket: function () {
+                this.socket = io.connect(cfg.urlServer, { 'forceNew': true });
+            },
+
+            isConnected: function () {
+                if (this.socket == null)
+                    return false;
+
+                return this.socket.connected;
+            },
+
+            getSocket: function () {
+                return this.socket;
+            }
+        });
+    </script>
+
+</dom-module>

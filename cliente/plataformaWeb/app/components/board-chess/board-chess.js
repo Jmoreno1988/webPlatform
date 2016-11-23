@@ -19,9 +19,9 @@
     _loadGame: function (fen) {
         this.$.paperDrawerPanelChess.style.visibility = 'visible';
         this.chess = new Chess();
-        this.chess.load(fen);
+        this.chess.load("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
         this.board = new Chessboard('board', {
-            position: fen,
+            position: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
             eventHandlers: {
                 onPieceSelected: this._pieceSelected.bind(this),
                 onMove: this._pieceMove.bind(this)
@@ -40,9 +40,9 @@
 
 
         nextPlayer = 'white';
-        if (this.chess.turn() === 'b') 
+        if (this.chess.turn() === 'b')
             nextPlayer = 'black';
-        
+
 
         if (chessMove !== null) {
             if (this.chess.in_checkmate() === true) {
@@ -66,7 +66,7 @@
             user: this.$.userName.value,
             fen: this.chess.fen()
         })
-        
+
 
         //return this.chess.fen();
     },

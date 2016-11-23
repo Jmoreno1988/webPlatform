@@ -3,10 +3,14 @@
     is: 'login-component',
 
     properties: {
-
+        socketManager: {
+            type: Object,
+            value: null
+        }
     },
 
     ready: function () {
+        this.socketManager = document.querySelector('socket-manager');
         document.addEventListener('closeSession', function () { this._close() }.bind(this));
     },
 
@@ -29,8 +33,10 @@
     },
 
     _validate: function () {
-        var socket = io.connect('http://localhost:3000', { 'forceNew': true });
+        if (!this.socketManager.isConnected())
+            this.socketManager.createSocket();
 
+        var socket = this.socketManager.getSocket();
         socket.on('respondValidate', function (msg) {
             switch (msg.type) {
                 case 200:
@@ -49,7 +55,10 @@
     },
 
     _createUser: function () {
-        var socket = io.connect('http://localhost:3000', { 'forceNew': true });
+        if (!this.socketManager.isConnected())
+            this.socketManager.createSocket();
+
+        var socket = this.socketManager.getSocket();
 
         socket.on('respondCreateUser', function (msg) {
             switch (msg.type) {

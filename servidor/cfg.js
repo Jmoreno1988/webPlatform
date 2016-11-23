@@ -8,6 +8,7 @@ var cfg = {
 		"/cfg.js",
 		"/models/ModelUsers.js",
 		"/models/ModelGames.js",
+		"/class/UsersManager.js",
 		"/class/HandlerLogin.js",
 		"/class/HandlerMenu.js",
 		"/class/HandlerGameChess.js"

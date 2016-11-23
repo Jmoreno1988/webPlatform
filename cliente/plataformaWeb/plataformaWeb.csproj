@@ -19,6 +19,7 @@
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="app\all-imports.html" />
     <Content Include="app\cfg.js" />
     <Content Include="app\components\board-chess\board-chess-styles.html" />
     <Content Include="app\components\board-chess\board-chess.html" />
@@ -165,6 +166,7 @@
     <Content Include="app\components\login-component\login-component.js" />
     <Content Include="app\components\menu-component\menu-component.html" />
     <Content Include="app\components\menu-component\menu-component.js" />
+    <Content Include="app\components\socket-manager\socket-manager.html" />
     <Content Include="index.html" />
     <Content Include="web.config" />
   </ItemGroup>

@@ -8,10 +8,14 @@ function HandlerGameChess(socket, modelUser, modelGames, sq) {
 
 	//socket.on('getRandomUser', function(data) { this.getRandomUser() }.bind(this));
     //socket.on('getListGames', function(data) { this.getListGames(data.userName) }.bind(this));
+
+    // Recibir movimiento en FEN
+    this.socket.on('sendFen', function(data) { this.playerMove(data.fen) }.bind(this));
 }
 
-HandlerGameChess.prototype.saveGame = function() {
-
+HandlerGameChess.prototype.playerMove = function(user, game, fen) {
+	// salvar nuevo fen
+	//informar al otro jugador si esta conectado 
 }
 
 // Movimiento

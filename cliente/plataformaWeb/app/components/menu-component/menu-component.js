@@ -3,7 +3,14 @@
     is: 'menu-component',
 
     properties: {
+        socketManager: {
+            type: Object,
+            value: null
+        }
+    },
 
+    ready: function () {
+        this.socketManager = document.querySelector('socket-manager');
     },
 
     attached: function () {
@@ -21,9 +28,7 @@
     },
 
     _init: function (cfgInit) {
-        //this.style.visibility = "visible";
-
-        var socket = io.connect('http://localhost:3000', { 'forceNew': true });
+        var socket = this.socketManager.getSocket();
 
         socket.on('respondGetListGames', function (msg) {
             switch (msg.type) {
@@ -49,7 +54,7 @@
     },
 
     _getRandomUser: function () {
-        var socket = io.connect('http://localhost:3000', { 'forceNew': true });
+        var socket = this.socketManager.getSocket();
 
         socket.on('respondGetRandomUser', function (msg) {
             switch (msg.type) {
@@ -73,16 +78,19 @@
     _inflateListGames: function (listGames) {
 
         this.$.contentGames.innerHTML = "";
+        var n = JSON.stringify(listGames[0]);
 
         for (var i = 0; i < listGames.length; i++) {
             var cardGame = document.createElement("card-game");
             cardGame.creator = listGames[i].nameCreator;
             cardGame.follower = listGames[i].nameFollow;
             cardGame.initgame = listGames[i].createdAt;
-            cardGame.lastmov = listGames[i].updateAt;
+            cardGame.lastmov = listGames[i].updateAt; 
             cardGame.type = listGames[i].type;
             cardGame.turn = listGames[i].turn;
             cardGame.fen = listGames[i].board; // Cambiar en la bbdd board to fen
+            cardGame.raw = JSON.stringify(listGames[i]); // Todos los datos del registro de la bbdd
+
             this.$.contentGames.appendChild(cardGame);
         }
     },
