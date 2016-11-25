@@ -46,7 +46,7 @@
     },
 
     _loadBoard: function () {
-        this.fire('loadBoardChess', { fen: this.fen});
+        this.fire('loadBoardChess', { raw: this.raw });
     },
 
     _goToBoard: function () {

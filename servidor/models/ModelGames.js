@@ -8,9 +8,7 @@ function ModelGames(nameTable, sq, Sequelize) {
             nameFollow: { type: Sequelize.STRING },
             turn: { type: Sequelize.INTEGER },
             board: { type: Sequelize.STRING },
-            type: { type: Sequelize.STRING },
-            createdAt: { type: Sequelize.STRING },
-            updatedAt: { type: Sequelize.STRING }
+            type: { type: Sequelize.STRING }
         }, {
             freezeTableName: true // Model tableName will be the same as the model name
     });

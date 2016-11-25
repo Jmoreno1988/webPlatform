@@ -5,18 +5,26 @@
     properties: {
         fen: String,
         chess: Object,
-        board: Object
+        board: Object,
+        socketManager: {
+            type: Object,
+            value: null
+        }
     },
 
     attached: function () {
+        this.socketManager = document.querySelector('socket-manager');
 
         //var board = new Chessboard('board', this.board);
         //this.$.board.addEventListener('click', function () { console.log(board.getPosition(ChessUtils.FEN.id)) });
         this.$.buttonBackToMenu.addEventListener('click', function () { this._backToMenu() }.bind(this));
-        document.addEventListener('loadBoardChess', function (evt) { this._loadGame(evt.detail.fen) }.bind(this))
+        document.addEventListener('loadBoardChess', function (evt) { this._loadGame(evt.detail.raw) }.bind(this))
     },
 
-    _loadGame: function (fen) {
+    _loadGame: function (raw) {
+        this.raw = JSON.parse(raw);
+        this.fen = this.raw.board;
+
         /*
         
         this.chess = new Chess();
@@ -33,17 +41,16 @@
 
         this.$.paperDrawerPanelChess.style.visibility = 'visible';
         this.chess = new Chess();
-
+        this.chess.load(this.fen);
         this.board = new Chessboard('board', {
-            position: ChessUtils.FEN.startId,
+            position: this.fen,
             eventHandlers: {
                 onPieceSelected: this.pieceSelected.bind(this),
                 onMove: this.pieceMove.bind(this)
             }
         });
 
-        this.resetGame();
-
+        //this.resetGame();
     },
 
     resetGame: function () {
@@ -91,7 +98,21 @@
             this.updateGameInfo(status);
         }
 
+        // Actualizamos el board
+        this.raw.board = this.chess.fen();
+
+        // Mandar fen al servidor
+        this.sendMove();
+        
+
         return this.chess.fen();
+    },
+
+    sendMove: function () {
+        var socket = this.socketManager.getSocket();
+        socket.emit('sendMoveToServer', {
+            raw: this.raw
+        })
     },
 
     pieceSelected: function (notationSquare) {

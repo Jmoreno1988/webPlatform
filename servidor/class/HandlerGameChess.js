@@ -10,12 +10,33 @@ function HandlerGameChess(socket, modelUser, modelGames, sq) {
     //socket.on('getListGames', function(data) { this.getListGames(data.userName) }.bind(this));
 
     // Recibir movimiento en FEN
-    this.socket.on('sendFen', function(data) { this.playerMove(data.fen) }.bind(this));
+    this.socket.on('sendMoveToServer', function(data) { this.playerMove(data.raw) }.bind(this));
 }
 
-HandlerGameChess.prototype.playerMove = function(user, game, fen) {
+HandlerGameChess.prototype.playerMove = function(raw) {
 	// salvar nuevo fen
-	//informar al otro jugador si esta conectado 
+
+	/*
+	this.modelGames.findOne({ where: {id: raw.id} }).then(function(game) {
+    	// guardamos info
+    	//game.updateAttributes({
+        //	turn: 22
+      	//})
+		game.turn = 22;
+		game.save().then(function() {})
+	}.bind(this));
+*/
+this.modelGames.findOne({ where: { id: raw.id } })
+  .then( function (game) {
+    // Check if record exists in db
+    if (game) {
+      game.updateAttributes({
+        turn: game.turn + 1,
+        board: raw.board
+      })
+      
+    }
+  })
 }
 
 // Movimiento
