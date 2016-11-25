@@ -17,7 +17,8 @@
     },
 
     _loadGame: function (fen) {
-        this.$.paperDrawerPanelChess.style.visibility = 'visible';
+        /*
+        
         this.chess = new Chess();
         this.chess.load("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
         this.board = new Chessboard('board', {
@@ -27,7 +28,120 @@
                 onMove: this._pieceMove.bind(this)
             }
         });
+        */
+
+
+        this.$.paperDrawerPanelChess.style.visibility = 'visible';
+        this.chess = new Chess();
+
+        this.board = new Chessboard('board', {
+            position: ChessUtils.FEN.startId,
+            eventHandlers: {
+                onPieceSelected: this.pieceSelected.bind(this),
+                onMove: this.pieceMove.bind(this)
+            }
+        });
+
+        this.resetGame();
+
     },
+
+    resetGame: function () {
+        this.board.setPosition(ChessUtils.FEN.startId);
+        this.chess.reset();
+
+        this.updateGameInfo('Next player is white.');
+    },
+
+    updateGameInfo: function (status) {
+        $('#info-status').html(status);
+        $('#info-fen').html(this.chess.fen());
+        $('#info-pgn').html(this.chess.pgn());
+    },
+
+    pieceMove: function (move) {
+
+        var nextPlayer,
+          status,
+          chessMove = this.chess.move({
+              from: move.from,
+              to: move.to,
+              promotion: 'q'
+          });
+
+
+        nextPlayer = 'white';
+        if (this.chess.turn() === 'b') {
+            nextPlayer = 'black';
+        }
+
+        if (chessMove !== null) {
+            if (this.chess.in_checkmate() === true) {
+                status = 'CHECKMATE! Player ' + nextPlayer + ' lost.';
+            } else if (this.chess.in_draw() === true) {
+                status = 'DRAW!';
+            } else {
+                status = 'Next player is ' + nextPlayer + '.';
+
+                if (this.chess.in_check() === true) {
+                    status = 'CHECK! ' + status;
+                }
+            }
+
+            this.updateGameInfo(status);
+        }
+
+        return this.chess.fen();
+    },
+
+    pieceSelected: function (notationSquare) {
+        var i,
+          movesNotation,
+          movesPosition = [];
+
+        movesNotation = this.chess.moves({ square: notationSquare, verbose: true });
+        for (i = 0; i < movesNotation.length; i++) {
+            movesPosition.push(ChessUtils.convertNotationSquareToIndex(movesNotation[i].to));
+        }
+        return movesPosition;
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+
 
     _pieceMove: function (move) {
         var nextPlayer = null;
@@ -104,4 +218,5 @@
     _backToMenu: function () {
         this.$.paperDrawerPanelChess.style.visibility = 'hidden';
     }
+    */
 })
