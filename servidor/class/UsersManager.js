@@ -5,15 +5,21 @@ function UsersManager() {
 }
 
 UsersManager.prototype.insertUsersConnected = function(socket) {
-	this.listUsersConnected.push(socket);
+	var connection = {
+		userId: null,
+		socket: socket
+	}
+	this.listUsersConnected.push(connection);
 }
 
 UsersManager.prototype.removeUsersConnected = function(socket) {
 	try {
 	for(var i = 0; i < this.listUsersConnected.length; i++) 
-		if(socket.id == this.listUsersConnected[i].id) 
+		if(socket.id == this.listUsersConnected[i].socket.id) 
 			this.listUsersConnected.splice(i, 1);
-	} catch(e) { console.log(":: ERRRO :: Fallo al sacar usuario de la lista de sockets.") }
+	} catch(e) { 
+		console.log(":: ERROR :: Fallo al sacar usuario de la lista de sockets.") 
+	}
 }
 
 UsersManager.prototype.getUsersConnected = function() {
@@ -22,6 +28,26 @@ UsersManager.prototype.getUsersConnected = function() {
 
 UsersManager.prototype.getUsersConnected = function() {
 	return this.listUsersConnected;
+}
+
+UsersManager.prototype.getConnectionByIdSocket = function(socketId) {
+	var conn = null;
+
+	for(var i = 0; i < this.listUsersConnected.length; i++) 
+		if(socketId == this.listUsersConnected[i].socket.id) 
+			conn = this.listUsersConnected[i];
+
+	return conn;
+}
+
+UsersManager.prototype.getConnectionByUserId = function(userId) {
+	var conn = null;
+
+	for(var i = 0; i < this.listUsersConnected.length; i++) 
+		if(this.listUsersConnected[i].userId != null && userId == this.listUsersConnected[i].userId) 
+			conn = this.listUsersConnected[i];
+
+	return conn;
 }
 
 UsersManager.prototype.totalUsersConnected = function() {

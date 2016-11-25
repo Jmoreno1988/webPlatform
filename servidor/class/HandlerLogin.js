@@ -1,9 +1,10 @@
 HandlerLogin.prototype.constructor = HandlerLogin;
 
-function HandlerLogin(socket, modelUser, sq) {
+function HandlerLogin(socket, modelUser, sq, usersManager) {
 	this.socket = socket;
 	this.modelUser = modelUser;
 	this.sq = sq;
+	this.usersManager = usersManager;
     
     socket.on('validateUser', function(data) { this.validateUser(data.userName, data.password) }.bind(this));
     socket.on('createUser', function(data) { this.createUser(data.userName, data.password, data.email) }.bind(this));
@@ -11,6 +12,14 @@ function HandlerLogin(socket, modelUser, sq) {
 
 HandlerLogin.prototype.validateUser = function(userName, password) {
 	this.modelUser.findOne({ where: {userName: userName, password: password} }).then(function(user) {
+			
+			// Asociar conexion con usuario
+			if(user) {
+				var conn = this.usersManager.getConnectionByIdSocket(this.socket.id)
+				if(conn) 
+					conn.userId = user.id;
+			}
+
     		var type = user ? 200 : 410;
 			this.socket.emit('respondValidate', {type: type, data: {}});	    
 	}.bind(this));

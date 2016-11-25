@@ -23,13 +23,13 @@ function main() {
 
     // Por cada nueva conexión
     io.on('connection', function(socket) {
-        // Guardamos quien se ha conectado
+        // Guardamos el socket de la nueva conexion
         usersManager.insertUsersConnected(socket);
 
         // Creamos sus handlers 
-        var handlerLogin = new HandlerLogin(socket, modelUsers.getModel(), sq);
+        var handlerLogin = new HandlerLogin(socket, modelUsers.getModel(), sq, usersManager);
         var handlerMenu = new HandlerMenu(socket, modelUsers.getModel(), modelGames.getModel(), sq);
-        var handlerGameChess = new HandlerGameChess(socket, modelUsers.getModel(), modelGames.getModel(), sq);
+        var handlerGameChess = new HandlerGameChess(socket, modelUsers.getModel(), modelGames.getModel(), sq, usersManager);
 
         // Escucha para la desconexion
         socket.on('disconnect', function() {
