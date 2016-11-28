@@ -29,7 +29,7 @@ function main() {
         // Creamos sus handlers 
         var handlerLogin = new HandlerLogin(socket, modelUsers.getModel(), sq, usersManager);
         var handlerMenu = new HandlerMenu(socket, modelUsers.getModel(), modelGames.getModel(), sq);
-        var handlerGameChess = new HandlerGameChess(socket, modelUsers.getModel(), modelGames.getModel(), sq, usersManager);
+        var handlerGameChess = new HandlerGameChess(io, socket, modelUsers.getModel(), modelGames.getModel(), sq, usersManager);
 
         // Escucha para la desconexion
         socket.on('disconnect', function() {

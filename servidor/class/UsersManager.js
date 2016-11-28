@@ -40,7 +40,7 @@ UsersManager.prototype.getConnectionByIdSocket = function(socketId) {
 	return conn;
 }
 
-UsersManager.prototype.getConnectionByUserId = function(userId) {
+UsersManager.prototype.getConnectionByIdUser = function(userId) {
 	var conn = null;
 
 	for(var i = 0; i < this.listUsersConnected.length; i++) 
